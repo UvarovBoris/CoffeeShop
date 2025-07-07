@@ -15,7 +15,7 @@ import com.example.coffeeshop.features.onboarding.OnboardingScreen
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Onboarding.route
+        startDestination = Screen.Home.route
     ) {
         composable(Screen.Onboarding.route) {
             OnboardingScreen(

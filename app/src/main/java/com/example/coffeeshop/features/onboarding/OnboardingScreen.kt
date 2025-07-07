@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
 import com.example.coffeeshop.ui.theme.Black
 import com.example.coffeeshop.ui.theme.SoraFontFamily
-import com.example.coffeeshop.ui.theme.Tussock
+import com.example.coffeeshop.ui.theme.Brown
 
 @Composable
 fun OnboardingScreen(onGetStartedClick: () -> Unit) {
@@ -112,7 +112,7 @@ fun OnboardingInfoSection(
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(size = 16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Tussock),
+                colors = ButtonDefaults.buttonColors(containerColor = Brown),
                 contentPadding = PaddingValues(all = 16.dp)
             ) {
                 Text(

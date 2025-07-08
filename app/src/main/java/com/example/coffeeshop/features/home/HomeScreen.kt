@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.R
+import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
-fun HomeScreen(onItemClick: (String) -> Unit) {
+fun HomeScreen(onProductClick: (ProductData) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -43,7 +44,10 @@ fun HomeScreen(onItemClick: (String) -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
                 items(products) { item ->
-                    ProductItem(item) { }
+                    ProductItem(
+                        item,
+                        onClick = onProductClick
+                    )
                 }
             }
         }
@@ -63,5 +67,5 @@ val bottomBarItems = listOf(
 )
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(onItemClick = {})
+    HomeScreen(onProductClick = {})
 }

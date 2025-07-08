@@ -2,6 +2,7 @@ package com.example.coffeeshop.features.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,7 +40,7 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 @Composable
 fun ProductItem(
     product: ProductData,
-    onClick: (String) -> Unit
+    onClick: (ProductData) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -48,6 +49,7 @@ fun ProductItem(
                 color = SurfaceWhite,
                 shape = RoundedCornerShape(16.dp)
             )
+            .clickable(onClick = { onClick(product) })
             .padding(
                 start = 8.dp,
                 end = 8.dp,

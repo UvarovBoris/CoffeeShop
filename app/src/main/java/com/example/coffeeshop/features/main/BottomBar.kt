@@ -29,7 +29,7 @@ import com.example.coffeeshop.ui.theme.GreyLighter
 @Composable
 fun BottomBar(
     items: List<BottomBarItemData>,
-    selectedItem: Int,
+    currentRoute: String?,
     onItemSelected: (BottomBarItemData) -> Unit
 ) {
     Box(
@@ -50,7 +50,7 @@ fun BottomBar(
             items.forEach { data ->
                 BottomBarItem(
                     data = data,
-                    isSelected = data.id == selectedItem,
+                    isSelected = data.route == currentRoute,
                     modifier = Modifier
                         .size(width = 48.dp, height = 48.dp),
                     onItemSelected
@@ -103,7 +103,7 @@ fun BottomBarItem(
 fun BottomBarPreview() {
     BottomBar(
         items = bottomBarItems,
-        selectedItem = 0,
+        currentRoute = MainSubscreen.Home.route,
         onItemSelected = {}
     )
 }

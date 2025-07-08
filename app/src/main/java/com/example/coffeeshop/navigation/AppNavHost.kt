@@ -41,12 +41,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 ExitTransition.None
             }
         ) {
-            val mainScreenNavController = rememberNavController()
             MainScreen(
-                mainScreenNavController,
-                onBottomNavigationClick = { route ->
-                    mainScreenNavController.navigate(route)
-                },
                 onProductClick = { product ->
                     navController.navigate(Screen.ProductDetails.createRoute(product.id))
                 }

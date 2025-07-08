@@ -4,33 +4,36 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.coffeeshop.R
 import com.example.coffeeshop.data.ProductData
 
 @Composable
 fun MainScreen(
-    navController: NavHostController,
-    onBottomNavigationClick: (String) -> Unit = {},
+    navController: NavHostController = rememberNavController(),
     onProductClick: (ProductData) -> Unit
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             BottomBar(
                 items = bottomBarItems,
-                selectedItem
-            ) { bottomBarData ->
-                selectedItem = bottomBarData.id
-                onBottomNavigationClick(bottomBarData.screen.route)
+                currentRoute
+            ) { bottomBarItemData ->
+                navController.navigate(bottomBarItemData.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
         }
     ) { padding ->
@@ -43,10 +46,10 @@ fun MainScreen(
 }
 
 val bottomBarItems = listOf(
-    BottomBarItemData(0, MainSubscreen.Home, R.drawable.home, R.drawable.home_filled),
-    BottomBarItemData(1, MainSubscreen.Favorites, R.drawable.heart, R.drawable.heart_filled),
-    BottomBarItemData(2, MainSubscreen.Purchases, R.drawable.bag, R.drawable.bag_filled),
-    BottomBarItemData(3, MainSubscreen.Notifications, R.drawable.notification, R.drawable.notification_filled)
+    BottomBarItemData(MainSubscreen.Home.route, R.drawable.home, R.drawable.home_filled),
+    BottomBarItemData(MainSubscreen.Favorites.route, R.drawable.heart, R.drawable.heart_filled),
+    BottomBarItemData(MainSubscreen.Purchases.route, R.drawable.bag, R.drawable.bag_filled),
+    BottomBarItemData(MainSubscreen.Notifications.route, R.drawable.notification, R.drawable.notification_filled)
 )
 
 @Preview(

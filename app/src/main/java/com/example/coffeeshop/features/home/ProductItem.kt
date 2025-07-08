@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -41,6 +43,7 @@ fun ProductItem(
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .background(
                 color = SurfaceWhite,
                 shape = RoundedCornerShape(16.dp)
@@ -58,7 +61,8 @@ fun ProductItem(
                 contentDescription = "Product image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(140.dp, 128.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(140f / 128f)
                     .clip(RoundedCornerShape(12.dp))
             )
             Row(
@@ -83,7 +87,7 @@ fun ProductItem(
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = product.price,
+                    text = product.rating.toString(),
                     color = SurfaceWhite,
                     fontSize = 8.sp,
                     fontWeight = FontWeight.SemiBold,

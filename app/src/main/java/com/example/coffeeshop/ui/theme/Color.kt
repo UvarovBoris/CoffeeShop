@@ -9,4 +9,8 @@ val MineShaft = Color(0xFF313131)
 val Mercury = Color(0xFFE3E3E3)
 val Fantasy = Color(0xFFF9F2ED)
 
+val GreyNormal = Color(0xFF242424)
 val GreyLighter = Color(0xFFA2A2A2)
+
+val SurfaceWhite = Color(0xFFFFFFFF)
+val SurfaceLight = Color(0xFFF9F9F9)

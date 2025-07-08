@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -33,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.R
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLighter
+import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun HomeScreen(onItemClick: (String) -> Unit) {
@@ -42,7 +42,13 @@ fun HomeScreen(onItemClick: (String) -> Unit) {
             BottomBar()
         }
     ) { padding ->
-        Text("Hello")
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = SurfaceLight)
+        ) {
+
+        }
     }
 }
 
@@ -76,13 +82,15 @@ fun BottomBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 12.dp, bottom = 12.dp),
+                .padding(start = 12.dp, top = 12.dp, end = 12.dp, bottom = 12.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             items.forEach { data ->
                 BottomBarItem(
                     data = data,
-                    isSelected = data.id == selectedItem
+                    isSelected = data.id == selectedItem,
+                    modifier = Modifier
+                        .size(width = 48.dp, height = 48.dp)
                 ) { id -> selectedItem = id }
             }
         }
@@ -93,11 +101,11 @@ fun BottomBar(
 fun BottomBarItem(
     data: BottomBarItemData,
     isSelected: Boolean,
+    modifier: Modifier = Modifier,
     onItemSelected: (Int) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .size(width = 60.dp, height = 60.dp)
+        modifier = modifier
             .clickable { onItemSelected(data.id) },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

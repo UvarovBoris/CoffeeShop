@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.home
+package com.example.coffeeshop.features.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

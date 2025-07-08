@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.home
+package com.example.coffeeshop.features.favorites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,7 @@ import com.example.coffeeshop.features.main.ProductItem
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
-fun HomeScreen(
+fun FavoritesScreen(
     padding: PaddingValues,
     onProductClick: (ProductData) -> Unit
 ) {
@@ -54,8 +54,8 @@ fun HomeScreen(
     heightDp = 800
 )
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen(
+fun FavoritesScreenPreview() {
+    FavoritesScreen(
         padding = PaddingValues(0.dp),
         onProductClick = {}
     )

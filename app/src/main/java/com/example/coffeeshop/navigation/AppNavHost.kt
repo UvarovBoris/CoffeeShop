@@ -1,5 +1,7 @@
 package com.example.coffeeshop.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
@@ -9,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.coffeeshop.features.home.HomeScreen
+import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
 import com.example.coffeeshop.features.productDetails.ProductDetailsScreen
 
@@ -17,29 +19,34 @@ import com.example.coffeeshop.features.productDetails.ProductDetailsScreen
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Main.route
     ) {
         composable(Screen.Onboarding.route) {
             OnboardingScreen(
-                onGetStartedClick = { navController.navigate(Screen.Home.route) }
+                onGetStartedClick = { navController.navigate(Screen.Main.route) }
             )
         }
         composable(
-            Screen.Home.route,
+            Screen.Main.route,
             enterTransition = {
-                slideInHorizontally(initialOffsetX = { fullWidth -> 0 })
+                EnterTransition.None
             },
             exitTransition = {
-                slideOutHorizontally(targetOffsetX = { fullWidth -> 0 })
+                ExitTransition.None
             },
             popEnterTransition = {
-                slideInHorizontally(initialOffsetX = { fullWidth -> 0 })
+                EnterTransition.None
             },
             popExitTransition = {
-                slideOutHorizontally(targetOffsetX = { fullWidth -> 0 })
+                ExitTransition.None
             }
         ) {
-            HomeScreen(
+            val mainScreenNavController = rememberNavController()
+            MainScreen(
+                mainScreenNavController,
+                onBottomNavigationClick = { route ->
+                    mainScreenNavController.navigate(route)
+                },
                 onProductClick = { product ->
                     navController.navigate(Screen.ProductDetails.createRoute(product.id))
                 }

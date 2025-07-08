@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.home
+package com.example.coffeeshop.features.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,10 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,8 +29,9 @@ import com.example.coffeeshop.ui.theme.GreyLighter
 @Composable
 fun BottomBar(
     items: List<BottomBarItemData>,
+    selectedItem: Int,
+    onItemSelected: (BottomBarItemData) -> Unit
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,8 +52,9 @@ fun BottomBar(
                     data = data,
                     isSelected = data.id == selectedItem,
                     modifier = Modifier
-                        .size(width = 48.dp, height = 48.dp)
-                ) { id -> selectedItem = id }
+                        .size(width = 48.dp, height = 48.dp),
+                    onItemSelected
+                )
             }
         }
     }
@@ -67,11 +65,11 @@ fun BottomBarItem(
     data: BottomBarItemData,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
-    onItemSelected: (Int) -> Unit
+    onItemSelected: (BottomBarItemData) -> Unit
 ) {
     Column(
         modifier = modifier
-            .clickable { onItemSelected(data.id) },
+            .clickable { onItemSelected(data) },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -97,10 +95,15 @@ fun BottomBarItem(
     }
 }
 
-@Preview
+@Preview(
+    backgroundColor = 0xFF000000,
+    showBackground = true
+)
 @Composable
 fun BottomBarPreview() {
     BottomBar(
-        items = bottomBarItems
+        items = bottomBarItems,
+        selectedItem = 0,
+        onItemSelected = {}
     )
 }

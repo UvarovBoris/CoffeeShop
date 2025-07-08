@@ -40,10 +40,11 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 @Composable
 fun ProductItem(
     product: ProductData,
+    modifier: Modifier = Modifier,
     onClick: (ProductData) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(
                 color = SurfaceWhite,

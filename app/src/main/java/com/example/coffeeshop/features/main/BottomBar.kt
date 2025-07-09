@@ -36,7 +36,7 @@ import com.example.coffeeshop.ui.theme.RippleBrown
 @Composable
 fun BottomBar(
     items: List<BottomBarItemData>,
-    currentRoute: String?,
+    currentDestination: String?,
     onItemSelected: (BottomBarItemData) -> Unit
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -64,9 +64,11 @@ fun BottomBar(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 items.forEach { data ->
+                    val destinationName = data.destination::class.simpleName
+                    val isSelected = currentDestination?.contains(destinationName ?: "") == true
                     BottomBarItem(
                         data = data,
-                        isSelected = data.route == currentRoute,
+                        isSelected = isSelected,
                         onItemSelected = onItemSelected
                     )
                 }
@@ -120,7 +122,7 @@ fun BottomBarItem(
 fun BottomBarPreview() {
     BottomBar(
         items = bottomBarItems,
-        currentRoute = MainSubscreen.Home.route,
+        currentDestination = Home::class.simpleName,
         onItemSelected = {}
     )
 }

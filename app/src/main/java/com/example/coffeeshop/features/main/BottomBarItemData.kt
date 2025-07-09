@@ -1,7 +1,7 @@
 package com.example.coffeeshop.features.main
 
 data class BottomBarItemData(
-    val route: String,
+    val destination: Any,
     val icon: Int,
     val iconSelected: Int,
 )

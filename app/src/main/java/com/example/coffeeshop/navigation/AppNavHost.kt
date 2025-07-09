@@ -6,11 +6,10 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
 import com.example.coffeeshop.features.productDetails.ProductDetailsScreen
@@ -19,15 +18,14 @@ import com.example.coffeeshop.features.productDetails.ProductDetailsScreen
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Main.route
+        startDestination = Main
     ) {
-        composable(Screen.Onboarding.route) {
+        composable<Onboarding> {
             OnboardingScreen(
-                onGetStartedClick = { navController.navigate(Screen.Main.route) }
+                onGetStartedClick = { navController.navigate(Main) }
             )
         }
-        composable(
-            Screen.Main.route,
+        composable<Main>(
             enterTransition = {
                 EnterTransition.None
             },
@@ -43,13 +41,11 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         ) {
             MainScreen(
                 onProductClick = { product ->
-                    navController.navigate(Screen.ProductDetails.createRoute(product.id))
+                    navController.navigate(ProductDetails(product.id))
                 }
             )
         }
-        composable(
-            route = Screen.ProductDetails.route,
-            arguments = listOf(navArgument("productId") { type = NavType.IntType }),
+        composable<ProductDetails>(
             enterTransition = {
                 slideInHorizontally(initialOffsetX = { fullWidth -> fullWidth })
             },
@@ -63,8 +59,8 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })
             }
         ) { backStackEntry ->
-            val productId = backStackEntry.arguments?.getInt("productId") ?: -1
-            ProductDetailsScreen(productId)
+            val productDetails = backStackEntry.toRoute<ProductDetails>()
+            ProductDetailsScreen(productDetails.productId)
         }
     }
 }

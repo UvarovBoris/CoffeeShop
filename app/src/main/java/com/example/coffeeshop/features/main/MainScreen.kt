@@ -27,7 +27,7 @@ fun MainScreen(
                 items = bottomBarItems,
                 currentRoute
             ) { bottomBarItemData ->
-                navController.navigate(bottomBarItemData.route) {
+                navController.navigate(bottomBarItemData.destination) {
                     popUpTo(navController.graph.startDestinationId) {
                         saveState = true
                     }
@@ -46,10 +46,10 @@ fun MainScreen(
 }
 
 val bottomBarItems = listOf(
-    BottomBarItemData(MainSubscreen.Home.route, R.drawable.home, R.drawable.home_filled),
-    BottomBarItemData(MainSubscreen.Favorites.route, R.drawable.heart, R.drawable.heart_filled),
-    BottomBarItemData(MainSubscreen.Purchases.route, R.drawable.bag, R.drawable.bag_filled),
-    BottomBarItemData(MainSubscreen.Notifications.route, R.drawable.notification, R.drawable.notification_filled)
+    BottomBarItemData(Home, R.drawable.home, R.drawable.home_filled),
+    BottomBarItemData(Favorites, R.drawable.heart, R.drawable.heart_filled),
+    BottomBarItemData(Purchases, R.drawable.bag, R.drawable.bag_filled),
+    BottomBarItemData(Notifications, R.drawable.notification, R.drawable.notification_filled)
 )
 
 @Preview(

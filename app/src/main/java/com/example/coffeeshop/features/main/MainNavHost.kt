@@ -19,24 +19,24 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = MainSubscreen.Home.route
+        startDestination = Home
     ) {
-        composable(MainSubscreen.Home.route) {
+        composable<Home> {
             HomeScreen(
                 padding,
                 onProductClick = onProductClick
             )
         }
-        composable(MainSubscreen.Favorites.route) {
+        composable<Favorites> {
             FavoritesScreen(
                 padding,
                 onProductClick = onProductClick
             )
         }
-        composable(MainSubscreen.Purchases.route) {
+        composable<Purchases> {
             PurchasesScreen(padding)
         }
-        composable(MainSubscreen.Notifications.route) {
+        composable<Notifications> {
             NotificationsScreen(padding)
         }
     }

@@ -15,8 +15,8 @@ class HomeViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<HomeState>(HomeState.Loading)
-    val uiState: StateFlow<HomeState> = _uiState
+    private val _state = MutableStateFlow<HomeState>(HomeState.Loading)
+    val state: StateFlow<HomeState> = _state
 
     init {
         loadData()
@@ -24,8 +24,8 @@ class HomeViewModel @Inject constructor(
 
     private fun loadData() {
         viewModelScope.launch {
-            val products = getAllProductsUseCase.execute().first()
-            _uiState.value = HomeState.Success(products)
+            val products = getAllProductsUseCase().first()
+            _state.value = HomeState.Success(products)
         }
     }
 }

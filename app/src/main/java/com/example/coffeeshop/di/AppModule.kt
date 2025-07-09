@@ -5,6 +5,8 @@ import com.example.coffeeshop.data.ProductsDataSourceImpl
 import com.example.coffeeshop.data.ProductsRepositoryImpl
 import com.example.coffeeshop.domain.GetAllProductsUseCase
 import com.example.coffeeshop.domain.GetAllProductsUseCaseImpl
+import com.example.coffeeshop.domain.GetProductUseCase
+import com.example.coffeeshop.domain.GetProductUseCaseImpl
 import com.example.coffeeshop.domain.ProductsRepository
 import dagger.Module
 import dagger.Provides
@@ -32,5 +34,12 @@ object AppModule {
         repository: ProductsRepository,
     ): GetAllProductsUseCase {
         return GetAllProductsUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideGetProductUseCase(
+        repository: ProductsRepository,
+    ): GetProductUseCase {
+        return GetProductUseCaseImpl(repository)
     }
 }

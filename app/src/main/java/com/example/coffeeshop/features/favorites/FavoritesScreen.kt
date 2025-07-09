@@ -26,7 +26,7 @@ fun FavoritesScreen(
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     FavoritesScreen(
         state,
         padding,

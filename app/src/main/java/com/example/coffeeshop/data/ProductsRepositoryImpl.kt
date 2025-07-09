@@ -13,4 +13,9 @@ class ProductsRepositoryImpl(
         return productsDataSource.getAllProducts()
             .map { entities -> entities.map { it.toDomain() } }
     }
+
+    override fun getProduct(id: Int): Flow<Product> {
+        return productsDataSource.getProduct(id)
+            .map { it.toDomain() }
+    }
 }

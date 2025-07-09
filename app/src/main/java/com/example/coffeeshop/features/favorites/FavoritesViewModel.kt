@@ -15,8 +15,8 @@ class FavoritesViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<FavoritesState>(FavoritesState.Loading)
-    val uiState: StateFlow<FavoritesState> = _uiState
+    private val _state = MutableStateFlow<FavoritesState>(FavoritesState.Loading)
+    val state: StateFlow<FavoritesState> = _state
 
     init {
         loadData()
@@ -24,8 +24,8 @@ class FavoritesViewModel @Inject constructor(
 
     private fun loadData() {
         viewModelScope.launch {
-            val products = getAllProductsUseCase.execute().first()
-            _uiState.value = FavoritesState.Success(products)
+            val products = getAllProductsUseCase().first()
+            _state.value = FavoritesState.Success(products)
             // _uiState.value = MyScreenState.Error("Something went wrong")
         }
     }

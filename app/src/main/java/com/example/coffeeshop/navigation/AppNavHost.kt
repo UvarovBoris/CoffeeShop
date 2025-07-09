@@ -63,12 +63,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             popExitTransition = {
                 slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })
             }
-        ) { backStackEntry ->
-            val productDetail = backStackEntry.toRoute<ProductDetail>()
+        ) {
             val viewModel = hiltViewModel<ProductDetailViewModel>()
             ProductDetailScreen(
                 viewModel,
-                testProducts.find { it.id == productDetail.productId }!!.toDomain(),
                 onBackClick = { navController.popBackStack() },
                 onBuyClick = { navController.navigate(Order) }
             )

@@ -37,9 +37,9 @@ fun HomeScreen(
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     HomeScreen(
-        uiState,
+        state,
         padding,
         onProductClick
     )

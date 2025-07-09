@@ -21,6 +21,7 @@ val GreyLightHover = Color(0xFF909090)
 
 val SurfaceWhite = Color(0xFFFFFFFF)
 val SurfaceLight = Color(0xFFF9F9F9)
+val SurfaceLightActive = Color(0xFFE3E3E3)
 val SurfaceNormalActive = Color(0xFFD8D8D8)
 
 @OptIn(ExperimentalMaterial3Api::class)

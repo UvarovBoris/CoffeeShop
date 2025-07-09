@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,6 +22,7 @@ import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
+import com.example.coffeeshop.ui.theme.SurfaceLightActive
 
 @Composable
 fun ProductDetailScreen(
@@ -52,6 +54,15 @@ fun ProductDetailScreen(
                     .fillMaxWidth()
                     .aspectRatio(327f / 202f)
                     .clip(RoundedCornerShape(16.dp))
+            )
+            Spacer(Modifier.height(16.dp))
+            DetailSection(product = product)
+            Spacer(Modifier.height(16.dp))
+            HorizontalDivider(
+                thickness = 1.dp,
+                color = SurfaceLightActive,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
             )
         }
     }

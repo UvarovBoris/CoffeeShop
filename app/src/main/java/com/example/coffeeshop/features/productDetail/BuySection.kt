@@ -22,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
 import com.example.coffeeshop.data.ProductData
+import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLightHover
 import com.example.coffeeshop.ui.theme.SoraFontFamily
@@ -33,7 +35,7 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun BuySection(
-    data: ProductData,
+    product: ProductData,
     modifier: Modifier = Modifier,
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
@@ -61,7 +63,7 @@ fun BuySection(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = data.price,
+                text = product.price,
                 color = Brown,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -86,4 +88,15 @@ fun BuySection(
             )
         }
     }
+}
+
+@Preview(
+    showBackground = true,
+    backgroundColor = 0xFF000000
+)
+@Composable
+fun BuySectionPreview() {
+    BuySection(
+        product = allProducts.first()
+    )
 }

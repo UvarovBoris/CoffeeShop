@@ -1,5 +1,7 @@
 package com.example.coffeeshop.di
 
+import com.example.coffeeshop.data.ProductsDataSource
+import com.example.coffeeshop.data.ProductsDataSourceImpl
 import com.example.coffeeshop.data.ProductsRepositoryImpl
 import com.example.coffeeshop.domain.GetAllProductsUseCase
 import com.example.coffeeshop.domain.GetAllProductsUseCaseImpl
@@ -14,8 +16,15 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     @Provides
-    fun provideProductsRepository(): ProductsRepository {
-        return ProductsRepositoryImpl()
+    fun provideProductsDataSource(): ProductsDataSource {
+        return ProductsDataSourceImpl()
+    }
+
+    @Provides
+    fun provideProductsRepository(
+        dataSource: ProductsDataSource,
+    ): ProductsRepository {
+        return ProductsRepositoryImpl(dataSource)
     }
 
     @Provides

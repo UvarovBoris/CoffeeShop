@@ -21,8 +21,19 @@ val SurfaceLight = Color(0xFFF9F9F9)
 val SurfaceNormalActive = Color(0xFFD8D8D8)
 
 @OptIn(ExperimentalMaterial3Api::class)
-val GreyRipple = RippleConfiguration(
+val RippleGrey = RippleConfiguration(
     color = GreyNormal,
+    rippleAlpha = RippleAlpha(
+        0.3f,
+        0.3f,
+        0.3f,
+        0.3f
+    )
+)
+
+@OptIn(ExperimentalMaterial3Api::class)
+val RippleBrown = RippleConfiguration(
+    color = Brown,
     rippleAlpha = RippleAlpha(
         0.3f,
         0.3f,

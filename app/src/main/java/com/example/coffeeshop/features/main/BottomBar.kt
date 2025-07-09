@@ -16,17 +16,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLighter
+import com.example.coffeeshop.ui.theme.RippleBrown
 
 @Composable
 fun BottomBar(
@@ -34,27 +39,37 @@ fun BottomBar(
     currentRoute: String?,
     onItemSelected: (BottomBarItemData) -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp)
-            )
-            .padding(WindowInsets.navigationBars.asPaddingValues())
-    ) {
-        Row(
+    @OptIn(ExperimentalMaterial3Api::class)
+    CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 12.dp, top = 12.dp, end = 12.dp, bottom = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            items.forEach { data ->
-                BottomBarItem(
-                    data = data,
-                    isSelected = data.route == currentRoute,
-                    onItemSelected = onItemSelected
+                .background(
+                    color = Color.White,
+                    shape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp)
                 )
+                .padding(WindowInsets.navigationBars.asPaddingValues())
+                .pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            awaitPointerEvent()
+                        }
+                    }
+                }
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 12.dp, top = 12.dp, end = 12.dp, bottom = 12.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                items.forEach { data ->
+                    BottomBarItem(
+                        data = data,
+                        isSelected = data.route == currentRoute,
+                        onItemSelected = onItemSelected
+                    )
+                }
             }
         }
     }

@@ -6,14 +6,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CoffeeShopTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
         content = {
-            CompositionLocalProvider(LocalRippleConfiguration provides GreyRipple) {
+            @OptIn(ExperimentalMaterial3Api::class)
+            CompositionLocalProvider(LocalRippleConfiguration provides RippleGrey) {
                 content()
             }
         }

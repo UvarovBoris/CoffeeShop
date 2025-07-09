@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -21,6 +24,7 @@ import com.example.coffeeshop.data.CategoryData
 import com.example.coffeeshop.data.categories
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyNormal
+import com.example.coffeeshop.ui.theme.RippleBrown
 import com.example.coffeeshop.ui.theme.SoraFontFamily
 
 @Composable
@@ -30,18 +34,21 @@ fun CategoriesSection(
     modifier: Modifier = Modifier,
     onCategoryClick: (CategoryData) -> Unit
 ) {
-    val scrollState = rememberScrollState()
-    Row(
-        modifier = modifier
-            .horizontalScroll(scrollState),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        categories.forEach {
-            CategoryItem(
-                data = it,
-                isSelected = selectedCategory == it,
-                onCategoryClick
-            )
+    @OptIn(ExperimentalMaterial3Api::class)
+    CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
+        val scrollState = rememberScrollState()
+        Row(
+            modifier = modifier
+                .horizontalScroll(scrollState),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            categories.forEach {
+                CategoryItem(
+                    data = it,
+                    isSelected = selectedCategory == it,
+                    onCategoryClick
+                )
+            }
         }
     }
 }

@@ -8,9 +8,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.features.main.ProductItem
@@ -19,11 +21,25 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun FavoritesScreen(
+    viewModel: FavoritesViewModel,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit
+    onProductClick: (ProductData) -> Unit,
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    FavoritesScreen(
+        state,
+        padding,
+        onProductClick
+    )
+}
+
+@Composable
+fun FavoritesScreen(
+    state: FavoritesState,
+    padding: PaddingValues,
+    onProductClick: (ProductData) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
-    val products = allProducts
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
@@ -38,11 +54,16 @@ fun FavoritesScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        items(products) { item ->
-            ProductItem(
-                item,
-                onClick = onProductClick
-            )
+        if (state is FavoritesState.Success) {
+            items(
+                state.products,
+                key = { it.id }
+            ) { item ->
+                ProductItem(
+                    item,
+                    onClick = onProductClick
+                )
+            }
         }
     }
 }
@@ -56,6 +77,7 @@ fun FavoritesScreen(
 @Composable
 fun FavoritesScreenPreview() {
     FavoritesScreen(
+        state = FavoritesState.Success(allProducts),
         padding = PaddingValues(0.dp),
         onProductClick = {}
     )

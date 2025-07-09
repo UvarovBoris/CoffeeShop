@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.home
+package com.example.coffeeshop.features.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,10 +11,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class FavoritesViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow<HomeState>(HomeState.Loading)
-    val uiState: StateFlow<HomeState> = _uiState
+    private val _uiState = MutableStateFlow<FavoritesState>(FavoritesState.Loading)
+    val uiState: StateFlow<FavoritesState> = _uiState
 
     init {
         loadData()
@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private fun loadData() {
         viewModelScope.launch {
             delay(1000) // simulate work
-            _uiState.value = HomeState.Success(allProducts)
+            _uiState.value = FavoritesState.Success(allProducts)
             // _uiState.value = MyScreenState.Error("Something went wrong")
         }
     }

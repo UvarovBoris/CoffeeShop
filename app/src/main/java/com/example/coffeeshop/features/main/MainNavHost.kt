@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.features.favorites.FavoritesScreen
+import com.example.coffeeshop.features.favorites.FavoritesViewModel
 import com.example.coffeeshop.features.home.HomeScreen
 import com.example.coffeeshop.features.home.HomeViewModel
 import com.example.coffeeshop.features.notifications.NotificationsScreen
@@ -32,7 +33,9 @@ fun MainNavHost(
             )
         }
         composable<Favorites> {
+            val viewModel = hiltViewModel<FavoritesViewModel>()
             FavoritesScreen(
+                viewModel,
                 padding,
                 onProductClick = onProductClick
             )

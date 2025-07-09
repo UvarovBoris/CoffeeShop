@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.data.categories
@@ -35,7 +36,9 @@ fun HomeScreen(
     padding: PaddingValues,
     onProductClick: (ProductData) -> Unit,
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreen(
+        uiState,
         padding,
         onProductClick
     )
@@ -43,6 +46,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreen(
+    state: HomeState,
     padding: PaddingValues,
     onProductClick: (ProductData) -> Unit,
 ) {
@@ -53,7 +57,6 @@ fun HomeScreen(
             .background(color = SurfaceLight)
     ) {
         var selectedCategory by remember { mutableStateOf(categories.first()) }
-        val products = allProducts
 
         TopSection(
             paddingTop = padding.calculateTopPadding(),
@@ -84,12 +87,17 @@ fun HomeScreen(
             ),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(products) { item ->
-                ProductItem(
-                    item,
-                    modifier = Modifier.padding(bottom = 24.dp),
-                    onClick = onProductClick
-                )
+            if (state is HomeState.Success) {
+                items(
+                    state.products,
+                    key = { it.id }
+                ) { item ->
+                    ProductItem(
+                        item,
+                        modifier = Modifier.padding(bottom = 24.dp),
+                        onClick = onProductClick
+                    )
+                }
             }
         }
     }
@@ -102,6 +110,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
+        state = HomeState.Success(allProducts),
         padding = PaddingValues(0.dp),
         onProductClick = {}
     )

@@ -39,6 +39,9 @@ fun BottomBar(
     currentDestination: String?,
     onItemSelected: (BottomBarItemData) -> Unit
 ) {
+    val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
+    val navBarBottomPadding = navBarPadding.calculateBottomPadding()
+
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
         Box(
@@ -48,7 +51,7 @@ fun BottomBar(
                     color = Color.White,
                     shape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp)
                 )
-                .padding(WindowInsets.navigationBars.asPaddingValues())
+                .padding(bottom = navBarBottomPadding)
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
                         while (true) {

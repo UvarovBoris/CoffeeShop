@@ -10,9 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.coffeeshop.data.allProducts
 import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
-import com.example.coffeeshop.features.productDetails.ProductDetailsScreen
+import com.example.coffeeshop.features.productDetail.ProductDetailScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
@@ -41,11 +42,11 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         ) {
             MainScreen(
                 onProductClick = { product ->
-                    navController.navigate(ProductDetails(product.id))
+                    navController.navigate(ProductDetail(product.id))
                 }
             )
         }
-        composable<ProductDetails>(
+        composable<ProductDetail>(
             enterTransition = {
                 slideInHorizontally(initialOffsetX = { fullWidth -> fullWidth })
             },
@@ -59,8 +60,11 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })
             }
         ) { backStackEntry ->
-            val productDetails = backStackEntry.toRoute<ProductDetails>()
-            ProductDetailsScreen(productDetails.productId)
+            val productDetail = backStackEntry.toRoute<ProductDetail>()
+            ProductDetailScreen(
+                allProducts.find { it.id == productDetail.productId }!!,
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }

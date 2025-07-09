@@ -9,4 +9,4 @@ object Onboarding
 object Main
 
 @Serializable
-data class ProductDetails(val productId: Int)
+data class ProductDetail(val productId: Int)

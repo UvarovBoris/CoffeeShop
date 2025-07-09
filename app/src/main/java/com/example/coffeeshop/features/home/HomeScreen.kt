@@ -31,8 +31,20 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun HomeScreen(
+    viewModel: HomeViewModel,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit
+    onProductClick: (ProductData) -> Unit,
+) {
+    HomeScreen(
+        padding,
+        onProductClick
+    )
+}
+
+@Composable
+fun HomeScreen(
+    padding: PaddingValues,
+    onProductClick: (ProductData) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(

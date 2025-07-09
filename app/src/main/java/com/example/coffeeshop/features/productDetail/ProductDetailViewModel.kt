@@ -1,0 +1,11 @@
+package com.example.coffeeshop.features.productDetail
+
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class ProductDetailViewModel @Inject constructor() : ViewModel() {
+//    private val _state = mutableStateOf("Hello from ViewModel")
+//    val state: State<String> = _state
+}

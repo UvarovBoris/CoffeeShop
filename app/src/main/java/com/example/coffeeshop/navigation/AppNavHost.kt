@@ -5,6 +5,7 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,6 +16,7 @@ import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
 import com.example.coffeeshop.features.order.OrderScreen
 import com.example.coffeeshop.features.productDetail.ProductDetailScreen
+import com.example.coffeeshop.features.productDetail.ProductDetailViewModel
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
@@ -62,7 +64,9 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             }
         ) { backStackEntry ->
             val productDetail = backStackEntry.toRoute<ProductDetail>()
+            val viewModel = hiltViewModel<ProductDetailViewModel>()
             ProductDetailScreen(
+                viewModel,
                 allProducts.find { it.id == productDetail.productId }!!,
                 onBackClick = { navController.popBackStack() },
                 onBuyClick = { navController.navigate(Order) }

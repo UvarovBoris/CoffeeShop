@@ -26,6 +26,20 @@ import com.example.coffeeshop.ui.theme.SurfaceLightActive
 
 @Composable
 fun ProductDetailScreen(
+    viewModel: ProductDetailViewModel,
+    product: ProductData,
+    onBackClick: () -> Unit,
+    onBuyClick: () -> Unit,
+) {
+    ProductDetailScreen(
+        product,
+        onBackClick,
+        onBuyClick
+    )
+}
+
+@Composable
+fun ProductDetailScreen(
     product: ProductData,
     onBackClick: () -> Unit,
     onBuyClick: () -> Unit,

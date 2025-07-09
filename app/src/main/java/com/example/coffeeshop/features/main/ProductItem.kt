@@ -1,6 +1,5 @@
 package com.example.coffeeshop.features.main
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.coffeeshop.R
 import com.example.coffeeshop.data.ProductData
 import com.example.coffeeshop.data.allProducts
@@ -57,8 +57,8 @@ fun ProductItem(
             )
     ) {
         Box {
-            Image(
-                painter = painterResource(id = product.image),
+            AsyncImage(
+                model = product.image,
                 contentDescription = "Product image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

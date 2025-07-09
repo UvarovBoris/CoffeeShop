@@ -1,5 +1,8 @@
 package com.example.coffeeshop.ui.theme
 
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.ui.graphics.Color
 
 val Black = Color(0xFF050505)
@@ -16,3 +19,14 @@ val GreyLighter = Color(0xFFA2A2A2)
 val SurfaceWhite = Color(0xFFFFFFFF)
 val SurfaceLight = Color(0xFFF9F9F9)
 val SurfaceNormalActive = Color(0xFFD8D8D8)
+
+@OptIn(ExperimentalMaterial3Api::class)
+val GreyRipple = RippleConfiguration(
+    color = GreyNormal,
+    rippleAlpha = RippleAlpha(
+        0.3f,
+        0.3f,
+        0.3f,
+        0.3f
+    )
+)

@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,9 +59,9 @@ fun CategoryItem(
         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
         fontFamily = SoraFontFamily,
         modifier = Modifier
+            .clip(shape = RoundedCornerShape(6.dp))
             .background(
                 color = if (isSelected) Brown else Color(0x60EDEDED),
-                shape = RoundedCornerShape(6.dp)
             )
             .clickable(onClick = { onClick(data) })
             .padding(horizontal = 8.dp, vertical = 4.dp)

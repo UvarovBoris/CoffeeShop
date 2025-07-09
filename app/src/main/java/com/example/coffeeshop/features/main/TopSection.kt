@@ -21,11 +21,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -86,6 +88,12 @@ fun TopSection(
             TextField(
                 value = searchText,
                 onValueChange = { searchText = it },
+                textStyle = TextStyle(
+                    fontSize = 14.sp,
+                    fontFamily = SoraFontFamily,
+                    lineHeight = 16.8.sp,
+                    letterSpacing = 0.sp,
+                ),
                 singleLine = true,
                 leadingIcon = {
                     Icon(
@@ -113,10 +121,8 @@ fun TopSection(
             Spacer(modifier = Modifier.width(16.dp))
             Box(
                 modifier = Modifier
-                    .background(
-                        color = Brown,
-                        shape = RoundedCornerShape(12.dp)
-                    )
+                    .clip(shape = RoundedCornerShape(12.dp))
+                    .background(color = Brown)
                     .clickable(onClick = {})
                     .padding(18.dp)
             ) {
@@ -138,7 +144,8 @@ fun SearchPlaceholder() {
         color = GreyLighter,
         fontSize = 14.sp,
         fontFamily = SoraFontFamily,
-        lineHeight = 16.8.sp
+        lineHeight = 16.8.sp,
+        letterSpacing = 0.sp
     )
 }
 

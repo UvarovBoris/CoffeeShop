@@ -46,10 +46,8 @@ fun ProductItem(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(
-                color = SurfaceWhite,
-                shape = RoundedCornerShape(16.dp)
-            )
+            .clip(shape = RoundedCornerShape(16.dp))
+            .background(color = SurfaceWhite)
             .clickable(onClick = { onClick(product) })
             .padding(
                 start = 8.dp,

@@ -2,8 +2,8 @@ package com.example.coffeeshop.data
 
 import com.example.coffeeshop.R
 
-val allProducts = listOf(
-    ProductData(
+val testProducts = listOf(
+    ProductEntity(
         id = 0,
         name = "Caffe Mocha",
         description = "Deep Foam",
@@ -11,7 +11,7 @@ val allProducts = listOf(
         price = "$ 4.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 1,
         name = "Flat White",
         description = "Espresso",
@@ -19,7 +19,7 @@ val allProducts = listOf(
         price = "$ 3.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 2,
         name = "Mocha Fusi",
         description = "Ice/Hot",
@@ -27,7 +27,7 @@ val allProducts = listOf(
         price = "$ 7.53",
         rating = 4.6f
     ),
-    ProductData(
+    ProductEntity(
         id = 3,
         name = "Caffe Panna",
         description = "Ice/Hot",
@@ -35,7 +35,7 @@ val allProducts = listOf(
         price = "$ 5.53",
         rating = 4.6f
     ),
-    ProductData(
+    ProductEntity(
         id = 4,
         name = "Caffe Mocha",
         description = "Deep Foam",
@@ -43,7 +43,7 @@ val allProducts = listOf(
         price = "$ 4.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 5,
         name = "Flat White",
         description = "Espresso",
@@ -51,7 +51,7 @@ val allProducts = listOf(
         price = "$ 3.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 6,
         name = "Mocha Fusi",
         description = "Ice/Hot",
@@ -59,7 +59,7 @@ val allProducts = listOf(
         price = "$ 7.53",
         rating = 4.6f
     ),
-    ProductData(
+    ProductEntity(
         id = 7,
         name = "Caffe Panna",
         description = "Ice/Hot",
@@ -67,7 +67,7 @@ val allProducts = listOf(
         price = "$ 5.53",
         rating = 4.6f
     ),
-    ProductData(
+    ProductEntity(
         id = 8,
         name = "Caffe Mocha",
         description = "Deep Foam",
@@ -75,7 +75,7 @@ val allProducts = listOf(
         price = "$ 4.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 9,
         name = "Flat White",
         description = "Espresso",
@@ -83,7 +83,7 @@ val allProducts = listOf(
         price = "$ 3.53",
         rating = 4.8f
     ),
-    ProductData(
+    ProductEntity(
         id = 10,
         name = "Mocha Fusi",
         description = "Ice/Hot",
@@ -91,7 +91,7 @@ val allProducts = listOf(
         price = "$ 7.53",
         rating = 4.6f
     ),
-    ProductData(
+    ProductEntity(
         id = 11,
         name = "Caffe Panna",
         description = "Ice/Hot",

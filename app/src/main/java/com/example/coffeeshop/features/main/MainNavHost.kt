@@ -6,7 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.coffeeshop.data.ProductData
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.features.favorites.FavoritesScreen
 import com.example.coffeeshop.features.favorites.FavoritesViewModel
 import com.example.coffeeshop.features.home.HomeScreen
@@ -18,7 +18,7 @@ import com.example.coffeeshop.features.purchases.PurchasesScreen
 fun MainNavHost(
     navController: NavHostController,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     NavHost(
         navController = navController,

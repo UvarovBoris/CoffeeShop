@@ -13,8 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.features.main.ProductItem
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
@@ -23,7 +24,7 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 fun FavoritesScreen(
     viewModel: FavoritesViewModel,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     FavoritesScreen(
@@ -37,7 +38,7 @@ fun FavoritesScreen(
 fun FavoritesScreen(
     state: FavoritesState,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
     LazyVerticalGrid(
@@ -77,7 +78,7 @@ fun FavoritesScreen(
 @Composable
 fun FavoritesScreenPreview() {
     FavoritesScreen(
-        state = FavoritesState.Success(allProducts),
+        state = FavoritesState.Success(testProducts.map { it.toDomain() }),
         padding = PaddingValues(0.dp),
         onProductClick = {}
     )

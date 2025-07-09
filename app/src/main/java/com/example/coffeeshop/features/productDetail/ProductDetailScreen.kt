@@ -18,8 +18,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 import com.example.coffeeshop.ui.theme.SurfaceLightActive
@@ -27,7 +28,7 @@ import com.example.coffeeshop.ui.theme.SurfaceLightActive
 @Composable
 fun ProductDetailScreen(
     viewModel: ProductDetailViewModel,
-    product: ProductData,
+    product: Product,
     onBackClick: () -> Unit,
     onBuyClick: () -> Unit,
 ) {
@@ -40,7 +41,7 @@ fun ProductDetailScreen(
 
 @Composable
 fun ProductDetailScreen(
-    product: ProductData,
+    product: Product,
     onBackClick: () -> Unit,
     onBuyClick: () -> Unit,
 ) {
@@ -92,7 +93,7 @@ fun ProductDetailScreen(
 @Composable
 fun ProductDetailScreenPreview() {
     ProductDetailScreen(
-        product = allProducts.first(),
+        product = testProducts.first().toDomain(),
         onBackClick = {},
         onBuyClick = {}
     )

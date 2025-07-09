@@ -19,8 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.ui.theme.GreyLighter
 import com.example.coffeeshop.ui.theme.GreyNormalActive
 import com.example.coffeeshop.ui.theme.GreyNormalHover
@@ -28,7 +29,7 @@ import com.example.coffeeshop.ui.theme.SoraFontFamily
 
 @Composable
 fun DetailSection(
-    product: ProductData,
+    product: Product,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -77,6 +78,6 @@ fun DetailSection(
 @Composable
 fun DetailSectionPreview() {
     DetailSection(
-        product = allProducts.first()
+        product = testProducts.first().toDomain()
     )
 }

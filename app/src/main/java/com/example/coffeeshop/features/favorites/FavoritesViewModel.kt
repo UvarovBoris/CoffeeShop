@@ -2,16 +2,18 @@ package com.example.coffeeshop.features.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.domain.GetAllProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor() : ViewModel() {
+class FavoritesViewModel @Inject constructor(
+    private val getAllProductsUseCase: GetAllProductsUseCase,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<FavoritesState>(FavoritesState.Loading)
     val uiState: StateFlow<FavoritesState> = _uiState
@@ -22,8 +24,8 @@ class FavoritesViewModel @Inject constructor() : ViewModel() {
 
     private fun loadData() {
         viewModelScope.launch {
-            delay(1000) // simulate work
-            _uiState.value = FavoritesState.Success(allProducts)
+            val products = getAllProductsUseCase.execute().first()
+            _uiState.value = FavoritesState.Success(products)
             // _uiState.value = MyScreenState.Error("Something went wrong")
         }
     }

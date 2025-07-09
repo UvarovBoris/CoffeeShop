@@ -10,12 +10,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.coffeeshop.R
-import com.example.coffeeshop.data.ProductData
+import com.example.coffeeshop.domain.Product
 
 @Composable
 fun MainScreen(
     navController: NavHostController = rememberNavController(),
-    onProductClick: (ProductData) -> Unit
+    onProductClick: (Product) -> Unit,
 ) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route

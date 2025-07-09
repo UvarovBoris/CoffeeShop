@@ -1,8 +1,8 @@
-package com.example.coffeeshop.data
+package com.example.coffeeshop.domain
 
 import androidx.annotation.DrawableRes
 
-data class ProductData(
+data class Product(
     val id: Int,
     val name: String,
     val description: String,

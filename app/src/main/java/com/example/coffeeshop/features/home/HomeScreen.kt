@@ -21,9 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.categories
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.features.main.CategoriesSection
 import com.example.coffeeshop.features.main.ProductItem
 import com.example.coffeeshop.features.main.TopSection
@@ -34,7 +35,7 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 fun HomeScreen(
     viewModel: HomeViewModel,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreen(
@@ -48,7 +49,7 @@ fun HomeScreen(
 fun HomeScreen(
     state: HomeState,
     padding: PaddingValues,
-    onProductClick: (ProductData) -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(
@@ -110,7 +111,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
-        state = HomeState.Success(allProducts),
+        state = HomeState.Success(testProducts.map { it.toDomain() }),
         padding = PaddingValues(0.dp),
         onProductClick = {}
     )

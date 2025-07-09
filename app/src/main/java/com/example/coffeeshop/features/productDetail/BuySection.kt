@@ -26,8 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLightHover
 import com.example.coffeeshop.ui.theme.SoraFontFamily
@@ -35,7 +36,7 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun BuySection(
-    product: ProductData,
+    product: Product,
     modifier: Modifier = Modifier,
     onBuyClick: () -> Unit,
 ) {
@@ -98,7 +99,7 @@ fun BuySection(
 @Composable
 fun BuySectionPreview() {
     BuySection(
-        product = allProducts.first(),
+        product = testProducts.first().toDomain(),
         onBuyClick = {}
     )
 }

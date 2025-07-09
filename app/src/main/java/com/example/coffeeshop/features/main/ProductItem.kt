@@ -28,8 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.coffeeshop.R
-import com.example.coffeeshop.data.ProductData
-import com.example.coffeeshop.data.allProducts
+import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.ui.theme.Black
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLighter
@@ -39,9 +40,9 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun ProductItem(
-    product: ProductData,
+    product: Product,
     modifier: Modifier = Modifier,
-    onClick: (ProductData) -> Unit
+    onClick: (Product) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -154,7 +155,7 @@ fun ProductItem(
 @Composable
 fun ProductItemPreview() {
     ProductItem(
-        product = allProducts.first(),
+        product = testProducts.first().toDomain(),
         onClick = {}
     )
 }

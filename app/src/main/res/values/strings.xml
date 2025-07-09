@@ -11,4 +11,7 @@
     <string name="product_detail_name">Detail</string>
     <string name="product_detail_price">Price</string>
     <string name="product_detail_buy_button">Buy Now</string>
+
+    <string name="order_name">Order</string>
+
 </resources>

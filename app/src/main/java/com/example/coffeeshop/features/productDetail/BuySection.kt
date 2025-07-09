@@ -37,6 +37,7 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 fun BuySection(
     product: ProductData,
     modifier: Modifier = Modifier,
+    onBuyClick: () -> Unit,
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
     val navBarBottomPadding = navBarPadding.calculateBottomPadding()
@@ -73,7 +74,7 @@ fun BuySection(
         }
         Spacer(modifier.width(34.dp))
         Button(
-            onClick = {},
+            onClick = onBuyClick,
             shape = RoundedCornerShape(16.dp),
             contentPadding = PaddingValues(20.dp, 16.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Brown),
@@ -97,6 +98,7 @@ fun BuySection(
 @Composable
 fun BuySectionPreview() {
     BuySection(
-        product = allProducts.first()
+        product = allProducts.first(),
+        onBuyClick = {}
     )
 }

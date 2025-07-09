@@ -28,12 +28,18 @@ import com.example.coffeeshop.ui.theme.SurfaceLightActive
 fun ProductDetailScreen(
     product: ProductData,
     onBackClick: () -> Unit,
+    onBuyClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { TopBar(onBackClick = onBackClick) },
-        bottomBar = { BuySection(product) }
+        bottomBar = {
+            BuySection(
+                product = product,
+                onBuyClick = onBuyClick
+            )
+        }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -71,5 +77,9 @@ fun ProductDetailScreen(
 @Preview
 @Composable
 fun ProductDetailScreenPreview() {
-    ProductDetailScreen(allProducts.first(), {})
+    ProductDetailScreen(
+        product = allProducts.first(),
+        onBackClick = {},
+        onBuyClick = {}
+    )
 }

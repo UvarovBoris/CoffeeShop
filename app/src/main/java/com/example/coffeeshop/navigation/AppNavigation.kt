@@ -10,3 +10,6 @@ object Main
 
 @Serializable
 data class ProductDetail(val productId: Int)
+
+@Serializable
+object Order

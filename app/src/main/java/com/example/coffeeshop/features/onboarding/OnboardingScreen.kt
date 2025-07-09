@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
+import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.Black
 import com.example.coffeeshop.ui.theme.SoraFontFamily
 import com.example.coffeeshop.ui.theme.Brown
@@ -61,6 +62,7 @@ fun OnboardingInfoSection(
     modifier: Modifier,
     onGetStartedClick: () -> Unit
 ) {
+    SetStatusBarTextColor(isDark = false)
     Box(
         modifier = modifier
             .fillMaxWidth()

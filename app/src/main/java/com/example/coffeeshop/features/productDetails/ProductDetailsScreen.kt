@@ -9,10 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun ProductDetailsScreen(productId: Int) {
+    SetStatusBarTextColor(isDark = true)
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) { padding ->

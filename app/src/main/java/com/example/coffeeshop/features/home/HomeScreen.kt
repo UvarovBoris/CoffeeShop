@@ -2,7 +2,6 @@ package com.example.coffeeshop.features.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +26,7 @@ import com.example.coffeeshop.data.categories
 import com.example.coffeeshop.features.main.CategoriesSection
 import com.example.coffeeshop.features.main.ProductItem
 import com.example.coffeeshop.features.main.TopSection
+import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
@@ -34,7 +34,8 @@ fun HomeScreen(
     padding: PaddingValues,
     onProductClick: (ProductData) -> Unit
 ) {
-    Box(
+    SetStatusBarTextColor(isDark = false)
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = SurfaceLight)
@@ -42,43 +43,41 @@ fun HomeScreen(
         var selectedCategory by remember { mutableStateOf(categories.first()) }
         val products = allProducts
 
-        Column {
-            TopSection(
-                paddingTop = padding.calculateTopPadding(),
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            CategoriesSection(
-                categories = categories,
-                selectedCategory = selectedCategory,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = 24.dp,
-                        end = 24.dp
-                    ),
-            ) {
-                selectedCategory = it
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(
+        TopSection(
+            paddingTop = padding.calculateTopPadding(),
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        CategoriesSection(
+            categories = categories,
+            selectedCategory = selectedCategory,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
                     start = 24.dp,
-                    end = 24.dp,
-                    bottom = padding.calculateBottomPadding()
+                    end = 24.dp
                 ),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(products) { item ->
-                    ProductItem(
-                        item,
-                        modifier = Modifier.padding(bottom = 24.dp),
-                        onClick = onProductClick
-                    )
-                }
+        ) {
+            selectedCategory = it
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(
+                start = 24.dp,
+                end = 24.dp,
+                bottom = padding.calculateBottomPadding()
+            ),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(products) { item ->
+                ProductItem(
+                    item,
+                    modifier = Modifier.padding(bottom = 24.dp),
+                    onClick = onProductClick
+                )
             }
         }
     }

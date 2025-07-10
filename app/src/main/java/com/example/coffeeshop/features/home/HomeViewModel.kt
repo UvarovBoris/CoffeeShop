@@ -24,11 +24,9 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<HomeState> = combine(
         searchText, selectedCategory, allProducts
     ) { searchText, selectedCategory, allProducts ->
-        val filteredProducts = allProducts.filter {
-            val searchFilter = searchText.isBlank() || it.name.contains(searchText, ignoreCase = true)
-            val categoryFilter = selectedCategory == Category.AllCoffee || it.category == selectedCategory
-            searchFilter && categoryFilter
-        }
+        val filteredProducts = allProducts
+            .filter { searchText.isBlank() || it.name.contains(searchText, ignoreCase = true) }
+            .filter { selectedCategory == Category.AllCoffee || it.category == selectedCategory }
         HomeState(
             searchText = searchText,
             category = selectedCategory,

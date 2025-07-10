@@ -42,8 +42,8 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 fun TopSection(
     modifier: Modifier = Modifier,
     paddingTop: Dp = 0.dp,
-    searchText: String = "",
-    onSearchTextChange: (String) -> Unit = {},
+    searchText: String,
+    onSearchTextChange: (String) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -149,5 +149,8 @@ fun SearchPlaceholder() {
 @Preview
 @Composable
 fun TopSectionPreview() {
-    TopSection()
+    TopSection(
+        searchText = "",
+        onSearchTextChange = {}
+    )
 }

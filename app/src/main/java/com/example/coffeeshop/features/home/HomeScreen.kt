@@ -51,7 +51,7 @@ fun HomeScreen(
     state: HomeState,
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
-    onSearchTextChange: (String) -> Unit = {},
+    onSearchTextChange: (String) -> Unit,
     onCategorySelect: (Category) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)

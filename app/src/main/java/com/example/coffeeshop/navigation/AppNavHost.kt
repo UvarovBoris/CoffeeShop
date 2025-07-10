@@ -32,22 +32,20 @@ fun AppNavHost(
                 viewModel,
                 onGetStartedClick = {
                     viewModel.onGetStartedClick()
-                    navController.navigate(Main)
+                    navController.navigate(Main) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
         composable<Main>(
-            enterTransition = {
-                EnterTransition.None
-            },
             exitTransition = {
                 ExitTransition.None
             },
             popEnterTransition = {
                 EnterTransition.None
-            },
-            popExitTransition = {
-                ExitTransition.None
             }
         ) {
             MainScreen(

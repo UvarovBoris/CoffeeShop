@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.main
+package com.example.coffeeshop.features.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,7 +33,7 @@ fun CategoriesSection(
     categories: List<Category>,
     selectedCategory: Category,
     modifier: Modifier = Modifier,
-    onCategoryClick: (Category) -> Unit,
+    onSelectCategory: (Category) -> Unit,
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
@@ -47,7 +47,7 @@ fun CategoriesSection(
                 CategoryItem(
                     category = it,
                     isSelected = selectedCategory == it,
-                    onCategoryClick
+                    onSelectCategory
                 )
             }
         }
@@ -82,6 +82,6 @@ fun CategoriesSectionPreview() {
     CategoriesSection(
         categories = testCategories,
         selectedCategory = testCategories.first(),
-        onCategoryClick = {}
+        onSelectCategory = {}
     )
 }

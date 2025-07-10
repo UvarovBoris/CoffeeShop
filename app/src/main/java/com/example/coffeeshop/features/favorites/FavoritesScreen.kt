@@ -16,7 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
-import com.example.coffeeshop.features.main.ProductItem
+import com.example.coffeeshop.features.home.ProductItem
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 

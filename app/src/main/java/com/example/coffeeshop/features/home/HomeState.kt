@@ -1,13 +1,16 @@
 package com.example.coffeeshop.features.home
 
+import com.example.coffeeshop.data.Category
 import com.example.coffeeshop.domain.Product
 
-sealed class HomeState {
-    object Loading : HomeState()
+data class HomeState(
+    val category: Category = Category.AllCoffee,
+    val productsState: ProductsState = ProductsState.Loading,
+)
 
+sealed class ProductsState {
+    data object Loading : ProductsState()
     data class Success(
         val products: List<Product>,
-    ) : HomeState()
-
-    data class Error(val message: String) : HomeState()
+    ) : ProductsState()
 }

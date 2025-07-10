@@ -94,7 +94,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 11,
         name = "Caffe Panna",
-        category = Category.Americano,
+        category = Category.Espresso,
         image = R.drawable.product_3,
         price = "$ 5.53",
         rating = 4.6f

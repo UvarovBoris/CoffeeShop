@@ -14,6 +14,7 @@
 
     <string name="order_name">Order</string>
 
+    <string name="all_coffee">All Coffee</string>
     <string name="macchiato">Macchiato</string>
     <string name="latte">Latte</string>
     <string name="americano">Americano</string>

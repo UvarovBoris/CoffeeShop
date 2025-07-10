@@ -14,20 +14,15 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.coffeeshop.data.testProducts
+import com.example.coffeeshop.data.Category
 import com.example.coffeeshop.data.testCategories
+import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
-import com.example.coffeeshop.features.main.CategoriesSection
-import com.example.coffeeshop.features.main.ProductItem
-import com.example.coffeeshop.features.main.TopSection
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
@@ -41,7 +36,10 @@ fun HomeScreen(
     HomeScreen(
         state,
         padding,
-        onProductClick
+        onProductClick,
+        onSelectCategory = { category ->
+            viewModel.onSelectCategory(category)
+        }
     )
 }
 
@@ -50,6 +48,7 @@ fun HomeScreen(
     state: HomeState,
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
+    onSelectCategory: (Category) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(
@@ -57,8 +56,6 @@ fun HomeScreen(
             .fillMaxSize()
             .background(color = SurfaceLight)
     ) {
-        var selectedCategory by remember { mutableStateOf(testCategories.first()) }
-
         TopSection(
             paddingTop = padding.calculateTopPadding(),
             modifier = Modifier
@@ -67,16 +64,15 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(24.dp))
         CategoriesSection(
             categories = testCategories,
-            selectedCategory = selectedCategory,
+            selectedCategory = state.category,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     start = 24.dp,
                     end = 24.dp
                 ),
-        ) {
-            selectedCategory = it
-        }
+            onSelectCategory = onSelectCategory
+        )
         Spacer(modifier = Modifier.height(16.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -88,9 +84,9 @@ fun HomeScreen(
             ),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (state is HomeState.Success) {
+            if (state.productsState is ProductsState.Success) {
                 items(
-                    state.products,
+                    state.productsState.products,
                     key = { it.id }
                 ) { item ->
                     ProductItem(
@@ -111,8 +107,12 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
-        state = HomeState.Success(testProducts.map { it.toDomain() }),
+        state = HomeState(
+            category = Category.AllCoffee,
+            productsState = ProductsState.Success(testProducts.map { it.toDomain() })
+        ),
         padding = PaddingValues(0.dp),
-        onProductClick = {}
+        onProductClick = {},
+        onSelectCategory = {}
     )
 }

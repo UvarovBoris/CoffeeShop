@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.main
+package com.example.coffeeshop.features.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

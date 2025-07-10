@@ -15,7 +15,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CoffeeShopActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        val splashScreen = installSplashScreen()
+        var keepSplash = true
+        splashScreen.setKeepOnScreenCondition {
+            keepSplash
+        }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -23,6 +27,7 @@ class CoffeeShopActivity : ComponentActivity() {
             CoffeeShopTheme {
                 val startDestination by viewModel.startDestinationState.collectAsStateWithLifecycle()
                 startDestination?.let {
+                    keepSplash = false
                     AppNavHost(startDestination = it)
                 }
             }

@@ -17,14 +17,20 @@ class HomeViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
 ) : ViewModel() {
 
+    private val searchText = MutableStateFlow("")
     private val selectedCategory = MutableStateFlow(Category.AllCoffee)
     private val allProducts = getAllProductsUseCase()
 
-    val state: StateFlow<HomeState> = combine(selectedCategory, allProducts) { selectedCategory, allProducts ->
+    val state: StateFlow<HomeState> = combine(
+        searchText, selectedCategory, allProducts
+    ) { searchText, selectedCategory, allProducts ->
         val filteredProducts = allProducts.filter {
-            it.category == selectedCategory || selectedCategory == Category.AllCoffee
+            val searchFilter = searchText.isBlank() || it.name.contains(searchText, ignoreCase = true)
+            val categoryFilter = selectedCategory == Category.AllCoffee || it.category == selectedCategory
+            searchFilter && categoryFilter
         }
         HomeState(
+            searchText = searchText,
             category = selectedCategory,
             productsState = ProductsState.Success(filteredProducts)
         )
@@ -34,7 +40,11 @@ class HomeViewModel @Inject constructor(
         HomeState()
     )
 
-    fun onSelectCategory(category: Category) {
+    fun onCategorySelect(category: Category) {
         selectedCategory.value = category
+    }
+
+    fun onSearchTextChange(text: String) {
+        searchText.value = text
     }
 }

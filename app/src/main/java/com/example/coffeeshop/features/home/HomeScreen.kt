@@ -37,8 +37,11 @@ fun HomeScreen(
         state,
         padding,
         onProductClick,
-        onSelectCategory = { category ->
-            viewModel.onSelectCategory(category)
+        onSearchTextChange = { searchText ->
+            viewModel.onSearchTextChange(searchText)
+        },
+        onCategorySelect = { category ->
+            viewModel.onCategorySelect(category)
         }
     )
 }
@@ -48,7 +51,8 @@ fun HomeScreen(
     state: HomeState,
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
-    onSelectCategory: (Category) -> Unit,
+    onSearchTextChange: (String) -> Unit = {},
+    onCategorySelect: (Category) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(
@@ -57,9 +61,11 @@ fun HomeScreen(
             .background(color = SurfaceLight)
     ) {
         TopSection(
-            paddingTop = padding.calculateTopPadding(),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            paddingTop = padding.calculateTopPadding(),
+            searchText = state.searchText,
+            onSearchTextChange = onSearchTextChange
         )
         Spacer(modifier = Modifier.height(24.dp))
         CategoriesSection(
@@ -71,7 +77,7 @@ fun HomeScreen(
                     start = 24.dp,
                     end = 24.dp
                 ),
-            onSelectCategory = onSelectCategory
+            onCategorySelected = onCategorySelect
         )
         Spacer(modifier = Modifier.height(16.dp))
         LazyVerticalGrid(
@@ -108,11 +114,11 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     HomeScreen(
         state = HomeState(
-            category = Category.AllCoffee,
             productsState = ProductsState.Success(testProducts.map { it.toDomain() })
         ),
         padding = PaddingValues(0.dp),
         onProductClick = {},
-        onSelectCategory = {}
+        onSearchTextChange = {},
+        onCategorySelect = {}
     )
 }

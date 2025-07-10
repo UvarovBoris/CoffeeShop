@@ -16,10 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -44,10 +40,11 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun TopSection(
+    modifier: Modifier = Modifier,
     paddingTop: Dp = 0.dp,
-    modifier: Modifier = Modifier
+    searchText: String = "",
+    onSearchTextChange: (String) -> Unit = {},
 ) {
-    var searchText by remember { mutableStateOf("") }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -87,7 +84,7 @@ fun TopSection(
         ) {
             TextField(
                 value = searchText,
-                onValueChange = { searchText = it },
+                onValueChange = onSearchTextChange,
                 textStyle = TextStyle(
                     fontSize = 14.sp,
                     fontFamily = SoraFontFamily,
@@ -152,7 +149,5 @@ fun SearchPlaceholder() {
 @Preview
 @Composable
 fun TopSectionPreview() {
-    TopSection(
-
-    )
+    TopSection()
 }

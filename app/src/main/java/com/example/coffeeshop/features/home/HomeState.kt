@@ -4,6 +4,7 @@ import com.example.coffeeshop.data.Category
 import com.example.coffeeshop.domain.Product
 
 data class HomeState(
+    val searchText: String = "",
     val category: Category = Category.AllCoffee,
     val productsState: ProductsState = ProductsState.Loading,
 )

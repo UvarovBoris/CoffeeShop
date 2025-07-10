@@ -33,7 +33,7 @@ fun CategoriesSection(
     categories: List<Category>,
     selectedCategory: Category,
     modifier: Modifier = Modifier,
-    onSelectCategory: (Category) -> Unit,
+    onCategorySelected: (Category) -> Unit,
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
@@ -47,7 +47,7 @@ fun CategoriesSection(
                 CategoryItem(
                     category = it,
                     isSelected = selectedCategory == it,
-                    onSelectCategory
+                    onCategorySelected
                 )
             }
         }
@@ -82,6 +82,6 @@ fun CategoriesSectionPreview() {
     CategoriesSection(
         categories = testCategories,
         selectedCategory = testCategories.first(),
-        onSelectCategory = {}
+        onCategorySelected = {}
     )
 }

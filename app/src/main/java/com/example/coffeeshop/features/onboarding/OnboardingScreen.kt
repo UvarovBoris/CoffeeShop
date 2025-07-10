@@ -37,6 +37,16 @@ import com.example.coffeeshop.ui.theme.SoraFontFamily
 import com.example.coffeeshop.ui.theme.Brown
 
 @Composable
+fun OnboardingScreen(
+    viewModel: OnboardingViewModel,
+    onGetStartedClick: () -> Unit
+) {
+    OnboardingScreen(
+        onGetStartedClick = onGetStartedClick
+    )
+}
+
+@Composable
 fun OnboardingScreen(onGetStartedClick: () -> Unit) {
     Box(
         modifier = Modifier

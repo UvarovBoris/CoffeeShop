@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeShop.Splash">
         <activity
-            android:name=".MainActivity"
+            android:name=".CoffeeShopActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CoffeeShop.Splash">

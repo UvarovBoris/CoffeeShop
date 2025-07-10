@@ -10,24 +10,30 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import com.example.coffeeshop.data.testProducts
-import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
+import com.example.coffeeshop.features.onboarding.OnboardingViewModel
 import com.example.coffeeshop.features.order.OrderScreen
 import com.example.coffeeshop.features.productDetail.ProductDetailScreen
 import com.example.coffeeshop.features.productDetail.ProductDetailViewModel
 
 @Composable
-fun AppNavHost(navController: NavHostController = rememberNavController()) {
+fun AppNavHost(
+    navController: NavHostController = rememberNavController(),
+    startDestination: Any,
+) {
     NavHost(
         navController = navController,
-        startDestination = Main
+        startDestination = startDestination
     ) {
         composable<Onboarding> {
+            val viewModel = hiltViewModel<OnboardingViewModel>()
             OnboardingScreen(
-                onGetStartedClick = { navController.navigate(Main) }
+                viewModel,
+                onGetStartedClick = {
+                    viewModel.onGetStartedClick()
+                    navController.navigate(Main)
+                }
             )
         }
         composable<Main>(

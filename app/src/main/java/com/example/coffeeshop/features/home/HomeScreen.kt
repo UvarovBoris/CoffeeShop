@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.data.testProducts
-import com.example.coffeeshop.data.categories
+import com.example.coffeeshop.data.testCategories
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.features.main.CategoriesSection
@@ -57,7 +57,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(color = SurfaceLight)
     ) {
-        var selectedCategory by remember { mutableStateOf(categories.first()) }
+        var selectedCategory by remember { mutableStateOf(testCategories.first()) }
 
         TopSection(
             paddingTop = padding.calculateTopPadding(),
@@ -66,7 +66,7 @@ fun HomeScreen(
         )
         Spacer(modifier = Modifier.height(24.dp))
         CategoriesSection(
-            categories = categories,
+            categories = testCategories,
             selectedCategory = selectedCategory,
             modifier = Modifier
                 .fillMaxWidth()

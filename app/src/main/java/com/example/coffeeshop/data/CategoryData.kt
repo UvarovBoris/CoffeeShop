@@ -1,5 +1,10 @@
 package com.example.coffeeshop.data
 
-data class CategoryData(
-    val name: String
-)
+enum class Category {
+    Macchiato,
+    Latte,
+    Americano,
+    Mocha,
+    Espresso,
+    Cappuccino
+}

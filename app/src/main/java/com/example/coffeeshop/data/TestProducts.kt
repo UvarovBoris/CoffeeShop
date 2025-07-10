@@ -6,7 +6,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 0,
         name = "Caffe Mocha",
-        description = "Deep Foam",
+        category = Category.Mocha,
         image = R.drawable.product_0,
         price = "$ 4.53",
         rating = 4.8f
@@ -14,7 +14,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 1,
         name = "Flat White",
-        description = "Espresso",
+        category = Category.Latte,
         image = R.drawable.product_1,
         price = "$ 3.53",
         rating = 4.8f
@@ -22,7 +22,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 2,
         name = "Mocha Fusi",
-        description = "Ice/Hot",
+        category = Category.Mocha,
         image = R.drawable.product_2,
         price = "$ 7.53",
         rating = 4.6f
@@ -30,7 +30,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 3,
         name = "Caffe Panna",
-        description = "Ice/Hot",
+        category = Category.Macchiato,
         image = R.drawable.product_3,
         price = "$ 5.53",
         rating = 4.6f
@@ -38,7 +38,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 4,
         name = "Caffe Mocha",
-        description = "Deep Foam",
+        category = Category.Cappuccino,
         image = R.drawable.product_0,
         price = "$ 4.53",
         rating = 4.8f
@@ -46,7 +46,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 5,
         name = "Flat White",
-        description = "Espresso",
+        category = Category.Americano,
         image = R.drawable.product_1,
         price = "$ 3.53",
         rating = 4.8f
@@ -54,7 +54,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 6,
         name = "Mocha Fusi",
-        description = "Ice/Hot",
+        category = Category.Macchiato,
         image = R.drawable.product_2,
         price = "$ 7.53",
         rating = 4.6f
@@ -62,7 +62,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 7,
         name = "Caffe Panna",
-        description = "Ice/Hot",
+        category = Category.Americano,
         image = R.drawable.product_3,
         price = "$ 5.53",
         rating = 4.6f
@@ -70,7 +70,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 8,
         name = "Caffe Mocha",
-        description = "Deep Foam",
+        category = Category.Cappuccino,
         image = R.drawable.product_0,
         price = "$ 4.53",
         rating = 4.8f
@@ -78,7 +78,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 9,
         name = "Flat White",
-        description = "Espresso",
+        category = Category.Macchiato,
         image = R.drawable.product_1,
         price = "$ 3.53",
         rating = 4.8f
@@ -86,7 +86,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 10,
         name = "Mocha Fusi",
-        description = "Ice/Hot",
+        category = Category.Latte,
         image = R.drawable.product_2,
         price = "$ 7.53",
         rating = 4.6f
@@ -94,7 +94,7 @@ val testProducts = listOf(
     ProductEntity(
         id = 11,
         name = "Caffe Panna",
-        description = "Ice/Hot",
+        category = Category.Americano,
         image = R.drawable.product_3,
         price = "$ 5.53",
         rating = 4.6f

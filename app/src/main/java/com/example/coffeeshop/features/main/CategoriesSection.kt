@@ -20,8 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.coffeeshop.data.CategoryData
-import com.example.coffeeshop.data.categories
+import com.example.coffeeshop.data.Category
+import com.example.coffeeshop.data.testCategories
+import com.example.coffeeshop.presentation.categoryName
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyNormal
 import com.example.coffeeshop.ui.theme.RippleBrown
@@ -29,10 +30,10 @@ import com.example.coffeeshop.ui.theme.SoraFontFamily
 
 @Composable
 fun CategoriesSection(
-    categories: List<CategoryData>,
-    selectedCategory: CategoryData,
+    categories: List<Category>,
+    selectedCategory: Category,
     modifier: Modifier = Modifier,
-    onCategoryClick: (CategoryData) -> Unit
+    onCategoryClick: (Category) -> Unit,
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
@@ -44,7 +45,7 @@ fun CategoriesSection(
         ) {
             categories.forEach {
                 CategoryItem(
-                    data = it,
+                    category = it,
                     isSelected = selectedCategory == it,
                     onCategoryClick
                 )
@@ -55,12 +56,12 @@ fun CategoriesSection(
 
 @Composable
 fun CategoryItem(
-    data: CategoryData,
+    category: Category,
     isSelected: Boolean,
-    onClick: (CategoryData) -> Unit
+    onClick: (Category) -> Unit,
 ) {
     Text(
-        text = data.name,
+        text = categoryName(category),
         fontSize = 14.sp,
         color = if (isSelected) Color.White else GreyNormal,
         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
@@ -70,7 +71,7 @@ fun CategoryItem(
             .background(
                 color = if (isSelected) Brown else Color(0x60EDEDED),
             )
-            .clickable(onClick = { onClick(data) })
+            .clickable(onClick = { onClick(category) })
             .padding(horizontal = 8.dp, vertical = 4.dp)
     )
 }
@@ -79,8 +80,8 @@ fun CategoryItem(
 @Composable
 fun CategoriesSectionPreview() {
     CategoriesSection(
-        categories = categories,
-        selectedCategory = categories.first(),
+        categories = testCategories,
+        selectedCategory = testCategories.first(),
         onCategoryClick = {}
     )
 }

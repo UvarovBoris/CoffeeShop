@@ -14,4 +14,11 @@
 
     <string name="order_name">Order</string>
 
+    <string name="macchiato">Macchiato</string>
+    <string name="latte">Latte</string>
+    <string name="americano">Americano</string>
+    <string name="mocha">Mocha</string>
+    <string name="espresso">Espresso</string>
+    <string name="cappuccino">Cappuccino</string>
+
 </resources>

@@ -22,6 +22,7 @@ import com.example.coffeeshop.R
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
+import com.example.coffeeshop.presentation.categoryName
 import com.example.coffeeshop.ui.theme.GreyLighter
 import com.example.coffeeshop.ui.theme.GreyNormalActive
 import com.example.coffeeshop.ui.theme.GreyNormalHover
@@ -46,7 +47,7 @@ fun DetailSection(
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = product.description,
+            text = categoryName(product.category),
             color = GreyLighter,
             fontSize = 12.sp,
             fontFamily = SoraFontFamily,

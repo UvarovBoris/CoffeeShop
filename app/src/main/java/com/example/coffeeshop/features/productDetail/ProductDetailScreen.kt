@@ -47,18 +47,20 @@ fun ProductDetailScreen(
     onBuyClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
-    if (state is ProductDetailState.Success) {
-        val product = state.product
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            topBar = { TopBar(onBackClick = onBackClick) },
-            bottomBar = {
+    val product = if (state is ProductDetailState.Success) state.product else null
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { TopBar(onBackClick = onBackClick) },
+        bottomBar = {
+            product?.let {
                 BuySection(
                     product = product,
                     onBuyClick = onBuyClick
                 )
             }
-        ) { padding ->
+        }
+    ) { padding ->
+        product?.let {
             Column(
                 modifier = Modifier
                     .fillMaxSize()

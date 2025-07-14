@@ -1,4 +1,4 @@
-package com.example.coffeeshop.features.productDetail
+package com.example.coffeeshop.common.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -16,19 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
-import com.example.coffeeshop.ui.theme.GreyNormalActive
-import com.example.coffeeshop.ui.theme.GreyNormalHover
-import com.example.coffeeshop.ui.theme.SoraFontFamily
+import com.example.coffeeshop.ui.theme.CoffeeTheme
 
 @Composable
 fun TopBar(
+    title: String,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
 ) {
@@ -53,17 +48,12 @@ fun TopBar(
             Icon(
                 painter = painterResource(R.drawable.arrow_left),
                 contentDescription = "Back",
-                tint = GreyNormalHover,
+                tint = CoffeeTheme.color.onTopBar,
             )
         }
         Text(
-            text = stringResource(R.string.product_detail_name),
-            color = GreyNormalActive,
-            fontSize = 16.sp,
-            lineHeight = 19.2.sp,
-            fontFamily = SoraFontFamily,
-            fontWeight = FontWeight.SemiBold,
-            textAlign = TextAlign.Center,
+            text = title,
+            style = CoffeeTheme.typography.topBarTitle,
             modifier = Modifier.weight(1f)
         )
         Box(
@@ -75,7 +65,7 @@ fun TopBar(
             Icon(
                 painter = painterResource(R.drawable.heart),
                 contentDescription = "Add to favorites",
-                tint = GreyNormalHover,
+                tint = CoffeeTheme.color.onTopBar,
             )
         }
     }
@@ -85,6 +75,7 @@ fun TopBar(
 @Composable
 fun TopBarPreview() {
     TopBar(
+        title = "Title",
         onBackClick = {}
     )
 }

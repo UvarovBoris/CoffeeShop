@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.coffeeshop.R
 import com.example.coffeeshop.common.presentation.TopBar
+import com.example.coffeeshop.common.presentation.TopBarButton
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.ui.SetStatusBarTextColor
@@ -56,6 +57,13 @@ fun ProductDetailScreen(
         topBar = {
             TopBar(
                 title = stringResource(R.string.product_detail_name),
+                rightButton = {
+                    TopBarButton(
+                        icon = R.drawable.heart,
+                        contentDescription = "Favorites",
+                        onClick = { }
+                    )
+                },
                 onBackClick = onBackClick
             )
         },

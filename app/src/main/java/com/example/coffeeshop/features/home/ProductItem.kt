@@ -120,7 +120,7 @@ fun ProductItem(
         Spacer(modifier = Modifier.height(8.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = product.price,
+                text = "$ ${product.variants[1].price}",
                 color = Black,
                 fontSize = 18.sp,
                 fontFamily = SoraFontFamily,

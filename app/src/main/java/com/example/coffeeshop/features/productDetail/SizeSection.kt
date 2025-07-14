@@ -25,6 +25,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
+import com.example.coffeeshop.domain.ProductVariant
+import com.example.coffeeshop.domain.ProductSize
+import com.example.coffeeshop.domain.ProductSize.*
+import com.example.coffeeshop.presentation.sizeName
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.BrownLight
 import com.example.coffeeshop.ui.theme.CoffeeTheme
@@ -36,9 +40,9 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun SizeSection(
-    items: List<String>,
-    selectedItem: String,
-    onItemSelect: (String) -> Unit,
+    items: List<ProductVariant>,
+    selectedItem: ProductVariant,
+    onItemSelect: (ProductVariant) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -60,9 +64,9 @@ fun SizeSection(
 
 @Composable
 private fun SizesRow(
-    items: List<String>,
-    selectedItem: String,
-    onItemSelect: (String) -> Unit,
+    items: List<ProductVariant>,
+    selectedItem: ProductVariant,
+    onItemSelect: (ProductVariant) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -73,7 +77,7 @@ private fun SizesRow(
     ) {
         items.forEach {
             SizeItem(
-                text = it,
+                text = sizeName(it.size),
                 isSelected = it == selectedItem,
                 onClick = { onItemSelect(it) },
                 modifier = modifier.weight(1f)
@@ -123,9 +127,14 @@ fun SizeItem(
 )
 @Composable
 fun SizeSectionPreview() {
+    val items = listOf(
+        ProductVariant(Small, 2.99f),
+        ProductVariant(Medium, 3.49f),
+        ProductVariant(Large, 3.99f)
+    )
     SizeSection(
-        items = listOf("S", "M", "L"),
-        selectedItem = "S",
+        items = items,
+        selectedItem = items.first(),
         onItemSelect = {}
     )
 }

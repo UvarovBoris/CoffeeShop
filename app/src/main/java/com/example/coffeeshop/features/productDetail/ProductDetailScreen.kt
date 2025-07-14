@@ -112,7 +112,7 @@ fun ProductDetailScreen(
                         .padding(horizontal = 16.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                val sizes = listOf("S", "M", "L")
+                val sizes = product.variants
                 var selectedSize by remember { mutableStateOf(sizes.first()) }
                 SizeSection(
                     sizes,

@@ -8,6 +8,17 @@ data class Product(
     val name: String,
     val category: Category,
     @DrawableRes val image: Int,
-    val price: String,
+    val variants: List<ProductVariant>,
     val rating: Float,
 )
+
+data class ProductVariant(
+    val size: ProductSize,
+    val price: Float,
+)
+
+enum class ProductSize {
+    Small,
+    Medium,
+    Large
+}

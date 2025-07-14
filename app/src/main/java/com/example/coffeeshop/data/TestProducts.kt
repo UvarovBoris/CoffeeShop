@@ -1,6 +1,9 @@
 package com.example.coffeeshop.data
 
 import com.example.coffeeshop.R
+import com.example.coffeeshop.data.ProductSizeEntity.Large
+import com.example.coffeeshop.data.ProductSizeEntity.Medium
+import com.example.coffeeshop.data.ProductSizeEntity.Small
 
 val testProducts = listOf(
     ProductEntity(
@@ -8,7 +11,11 @@ val testProducts = listOf(
         name = "Caffe Mocha",
         category = Category.Mocha,
         image = R.drawable.product_0,
-        price = "$ 4.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 3.53f),
+            ProductVariantEntity(Medium, 4.53f),
+            ProductVariantEntity(Large, 5.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -16,7 +23,11 @@ val testProducts = listOf(
         name = "Flat White",
         category = Category.Latte,
         image = R.drawable.product_1,
-        price = "$ 3.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 2.53f),
+            ProductVariantEntity(Medium, 3.53f),
+            ProductVariantEntity(Large, 4.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -24,7 +35,11 @@ val testProducts = listOf(
         name = "Mocha Fusi",
         category = Category.Mocha,
         image = R.drawable.product_2,
-        price = "$ 7.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 6.53f),
+            ProductVariantEntity(Medium, 7.53f),
+            ProductVariantEntity(Large, 8.53f)
+        ),
         rating = 4.6f
     ),
     ProductEntity(
@@ -32,7 +47,11 @@ val testProducts = listOf(
         name = "Caffe Panna",
         category = Category.Macchiato,
         image = R.drawable.product_3,
-        price = "$ 5.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 4.53f),
+            ProductVariantEntity(Medium, 5.53f),
+            ProductVariantEntity(Large, 6.53f)
+        ),
         rating = 4.6f
     ),
     ProductEntity(
@@ -40,7 +59,11 @@ val testProducts = listOf(
         name = "Caffe Mocha",
         category = Category.Cappuccino,
         image = R.drawable.product_0,
-        price = "$ 4.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 3.53f),
+            ProductVariantEntity(Medium, 4.53f),
+            ProductVariantEntity(Large, 5.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -48,7 +71,11 @@ val testProducts = listOf(
         name = "Flat White",
         category = Category.Americano,
         image = R.drawable.product_1,
-        price = "$ 3.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 2.53f),
+            ProductVariantEntity(Medium, 3.53f),
+            ProductVariantEntity(Large, 4.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -56,7 +83,11 @@ val testProducts = listOf(
         name = "Mocha Fusi",
         category = Category.Macchiato,
         image = R.drawable.product_2,
-        price = "$ 7.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 6.53f),
+            ProductVariantEntity(Medium, 7.53f),
+            ProductVariantEntity(Large, 8.53f)
+        ),
         rating = 4.6f
     ),
     ProductEntity(
@@ -64,7 +95,11 @@ val testProducts = listOf(
         name = "Caffe Panna",
         category = Category.Americano,
         image = R.drawable.product_3,
-        price = "$ 5.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 4.53f),
+            ProductVariantEntity(Medium, 5.53f),
+            ProductVariantEntity(Large, 6.53f)
+        ),
         rating = 4.6f
     ),
     ProductEntity(
@@ -72,7 +107,11 @@ val testProducts = listOf(
         name = "Caffe Mocha",
         category = Category.Cappuccino,
         image = R.drawable.product_0,
-        price = "$ 4.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 3.53f),
+            ProductVariantEntity(Medium, 4.53f),
+            ProductVariantEntity(Large, 5.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -80,7 +119,11 @@ val testProducts = listOf(
         name = "Flat White",
         category = Category.Macchiato,
         image = R.drawable.product_1,
-        price = "$ 3.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 2.53f),
+            ProductVariantEntity(Medium, 3.53f),
+            ProductVariantEntity(Large, 4.53f)
+        ),
         rating = 4.8f
     ),
     ProductEntity(
@@ -88,7 +131,11 @@ val testProducts = listOf(
         name = "Mocha Fusi",
         category = Category.Latte,
         image = R.drawable.product_2,
-        price = "$ 7.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 6.53f),
+            ProductVariantEntity(Medium, 7.53f),
+            ProductVariantEntity(Large, 8.53f)
+        ),
         rating = 4.6f
     ),
     ProductEntity(
@@ -96,7 +143,11 @@ val testProducts = listOf(
         name = "Caffe Panna",
         category = Category.Espresso,
         image = R.drawable.product_3,
-        price = "$ 5.53",
+        variants = listOf(
+            ProductVariantEntity(Small, 4.53f),
+            ProductVariantEntity(Medium, 5.53f),
+            ProductVariantEntity(Large, 6.53f)
+        ),
         rating = 4.6f
     )
 )

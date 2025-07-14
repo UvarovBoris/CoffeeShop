@@ -65,7 +65,7 @@ fun BuySection(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = product.price,
+                text = "$ ${product.variants[1].price}",
                 color = Brown,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,

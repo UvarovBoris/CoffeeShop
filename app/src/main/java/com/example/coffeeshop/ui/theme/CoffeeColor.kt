@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val Black = Color(0xFF050505)
 val Brown = Color(0xFFC67C4E)
+val BrownLight = Color(0xFFF9F2ED)
 
 val GreyNormal = Color(0xFF313131)
 val GreyNormalHover = Color(0xFF2A2A2A)
@@ -19,4 +20,6 @@ val SurfaceNormalActive = Color(0xFFD8D8D8)
 
 object CoffeeColor {
     val onTopBar = GreyNormalHover
+
+    val title = GreyNormalActive
 }

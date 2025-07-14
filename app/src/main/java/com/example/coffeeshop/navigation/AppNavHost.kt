@@ -59,10 +59,10 @@ fun AppNavHost(
                 slideInHorizontally(initialOffsetX = { fullWidth -> fullWidth })
             },
             exitTransition = {
-                slideOutHorizontally(targetOffsetX = { fullWidth -> -fullWidth })
+                ExitTransition.None
             },
             popEnterTransition = {
-                slideInHorizontally(initialOffsetX = { fullWidth -> -fullWidth })
+                EnterTransition.None
             },
             popExitTransition = {
                 slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })

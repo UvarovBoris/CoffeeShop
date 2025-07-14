@@ -23,4 +23,12 @@ object CoffeeTypography {
         textAlign = TextAlign.Center,
         lineHeight = 19.2.sp,
     )
+
+    val detailSectionTitle = TextStyle(
+        color = CoffeeTheme.color.title,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontFamily = SoraFontFamily,
+        lineHeight = 24.sp,
+    )
 }

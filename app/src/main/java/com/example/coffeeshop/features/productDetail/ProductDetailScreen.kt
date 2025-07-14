@@ -13,6 +13,9 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -56,7 +59,7 @@ fun ProductDetailScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopBar(
-                title = stringResource(R.string.product_detail_name),
+                title = stringResource(R.string.product_detail_title),
                 rightButton = {
                     TopBarButton(
                         icon = R.drawable.heart,
@@ -85,7 +88,8 @@ fun ProductDetailScreen(
                     .padding(
                         start = 24.dp,
                         end = 24.dp,
-                        top = padding.calculateTopPadding()
+                        top = padding.calculateTopPadding(),
+                        bottom = padding.calculateBottomPadding()
                     )
             ) {
                 Spacer(Modifier.height(24.dp))
@@ -107,6 +111,15 @@ fun ProductDetailScreen(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                val sizes = listOf("S", "M", "L")
+                var selectedSize by remember { mutableStateOf(sizes.first()) }
+                SizeSection(
+                    sizes,
+                    selectedSize,
+                    onItemSelect = { selectedSize = it }
+                )
+                Spacer(modifier = Modifier.height(24.dp))
             }
         }
     }

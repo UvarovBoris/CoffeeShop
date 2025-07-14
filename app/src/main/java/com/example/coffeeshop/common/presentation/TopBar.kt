@@ -22,7 +22,8 @@ fun TopBar(
     title: String,
     modifier: Modifier = Modifier,
     rightButton: @Composable (() -> Unit)? = null,
-    onBackClick: () -> Unit,
+    needBack: Boolean = false,
+    onBackClick: (() -> Unit)? = null,
 ) {
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues()
     val statusBarTopPadding = statusBarPadding.calculateTopPadding()
@@ -36,11 +37,15 @@ fun TopBar(
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TopBarButton(
-            icon = R.drawable.arrow_left,
-            contentDescription = "Back",
-            onClick = onBackClick
-        )
+        if (needBack) {
+            TopBarButton(
+                icon = R.drawable.arrow_left,
+                contentDescription = "Back",
+                onClick = { onBackClick?.invoke() }
+            )
+        } else {
+            Spacer(modifier = Modifier.size(44.dp))
+        }
         Text(
             text = title,
             style = CoffeeTheme.typography.topBarTitle,

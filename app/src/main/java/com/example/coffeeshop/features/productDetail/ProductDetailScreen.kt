@@ -64,6 +64,7 @@ fun ProductDetailScreen(
                         onClick = { }
                     )
                 },
+                needBack = true,
                 onBackClick = onBackClick
             )
         },

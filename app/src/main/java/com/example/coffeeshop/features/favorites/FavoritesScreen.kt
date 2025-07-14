@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -45,9 +46,10 @@ fun FavoritesScreen(
         columns = GridCells.Fixed(2),
         modifier = Modifier
             .fillMaxSize()
-            .background(color = SurfaceLight),
+            .background(color = SurfaceLight)
+            .padding(top = padding.calculateTopPadding()),
         contentPadding = PaddingValues(
-            top = padding.calculateTopPadding(),
+            top = 24.dp,
             bottom = padding.calculateBottomPadding() + 24.dp,
             start = 24.dp,
             end = 24.dp

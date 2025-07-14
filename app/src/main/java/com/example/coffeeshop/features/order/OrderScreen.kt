@@ -26,6 +26,7 @@ fun OrderScreen(
         topBar = {
             TopBar(
                 title = stringResource(R.string.order_name),
+                needBack = true,
                 onBackClick = onBackClick
             )
         }

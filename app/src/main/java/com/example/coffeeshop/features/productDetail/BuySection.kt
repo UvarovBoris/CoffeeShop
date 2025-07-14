@@ -29,6 +29,7 @@ import com.example.coffeeshop.R
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
+import com.example.coffeeshop.domain.ProductVariant
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLightHover
 import com.example.coffeeshop.ui.theme.SoraFontFamily
@@ -36,9 +37,9 @@ import com.example.coffeeshop.ui.theme.SurfaceWhite
 
 @Composable
 fun BuySection(
-    product: Product,
-    modifier: Modifier = Modifier,
+    variant: ProductVariant,
     onBuyClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
     val navBarBottomPadding = navBarPadding.calculateBottomPadding()
@@ -65,7 +66,7 @@ fun BuySection(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "$ ${product.variants[1].price}",
+                text = "$ ${variant.price}",
                 color = Brown,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -98,8 +99,9 @@ fun BuySection(
 )
 @Composable
 fun BuySectionPreview() {
+    val product = testProducts.first().toDomain()
     BuySection(
-        product = testProducts.first().toDomain(),
+        variant = product.variants.first(),
         onBuyClick = {}
     )
 }

@@ -13,9 +13,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -29,6 +26,7 @@ import com.example.coffeeshop.common.presentation.TopBar
 import com.example.coffeeshop.common.presentation.TopBarButton
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
+import com.example.coffeeshop.domain.ProductVariant
 import com.example.coffeeshop.ui.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 import com.example.coffeeshop.ui.theme.SurfaceLightActive
@@ -43,6 +41,7 @@ fun ProductDetailScreen(
     ProductDetailScreen(
         state,
         onBackClick,
+        onVariantSelect = viewModel::onVariantSelect,
         onBuyClick
     )
 }
@@ -51,10 +50,15 @@ fun ProductDetailScreen(
 fun ProductDetailScreen(
     state: ProductDetailState,
     onBackClick: () -> Unit,
+    onVariantSelect: (ProductVariant) -> Unit,
     onBuyClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
     val product = if (state is ProductDetailState.Success) state.product else null
+    val selectedVariant = if (state is ProductDetailState.Success) state.selectedVariant else null
+    if (product == null || selectedVariant == null) {
+        return
+    }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -72,55 +76,49 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            product?.let {
-                BuySection(
-                    product = product,
-                    onBuyClick = onBuyClick
-                )
-            }
+            BuySection(
+                variant = selectedVariant,
+                onBuyClick = onBuyClick
+            )
         }
     ) { padding ->
-        product?.let {
-            Column(
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = SurfaceLight)
+                .padding(
+                    start = 24.dp,
+                    end = 24.dp,
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding()
+                )
+        ) {
+            Spacer(Modifier.height(24.dp))
+            AsyncImage(
+                model = product.image,
+                contentDescription = "Product image",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = SurfaceLight)
-                    .padding(
-                        start = 24.dp,
-                        end = 24.dp,
-                        top = padding.calculateTopPadding(),
-                        bottom = padding.calculateBottomPadding()
-                    )
-            ) {
-                Spacer(Modifier.height(24.dp))
-                AsyncImage(
-                    model = product.image,
-                    contentDescription = "Product image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(327f / 202f)
-                        .clip(RoundedCornerShape(16.dp))
-                )
-                Spacer(Modifier.height(16.dp))
-                DetailSection(product = product)
-                Spacer(Modifier.height(16.dp))
-                HorizontalDivider(
-                    thickness = 1.dp,
-                    color = SurfaceLightActive,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                val sizes = product.variants
-                var selectedSize by remember { mutableStateOf(sizes.first()) }
-                SizeSection(
-                    sizes,
-                    selectedSize,
-                    onItemSelect = { selectedSize = it }
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-            }
+                    .fillMaxWidth()
+                    .aspectRatio(327f / 202f)
+                    .clip(RoundedCornerShape(16.dp))
+            )
+            Spacer(Modifier.height(16.dp))
+            DetailSection(product = product)
+            Spacer(Modifier.height(16.dp))
+            HorizontalDivider(
+                thickness = 1.dp,
+                color = SurfaceLightActive,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            SizeSection(
+                product.variants,
+                selectedVariant,
+                onItemSelect = onVariantSelect
+            )
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
@@ -128,9 +126,11 @@ fun ProductDetailScreen(
 @Preview
 @Composable
 fun ProductDetailScreenPreview() {
+    val product = testProducts.first().toDomain()
     ProductDetailScreen(
-        state = ProductDetailState.Success(testProducts.first().toDomain()),
+        state = ProductDetailState.Success(product, product.variants.first()),
         onBackClick = {},
+        onVariantSelect = {},
         onBuyClick = {}
     )
 }

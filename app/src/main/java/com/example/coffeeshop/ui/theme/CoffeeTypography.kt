@@ -12,6 +12,7 @@ import com.example.coffeeshop.R
 val SoraFontFamily = FontFamily(
     Font(R.font.sora_regular, FontWeight.Normal, FontStyle.Normal),
     Font(R.font.sora_semi_bold, FontWeight.SemiBold, FontStyle.Normal),
+    Font(R.font.sora_light, FontWeight.Light, FontStyle.Normal),
 )
 
 object CoffeeTypography {

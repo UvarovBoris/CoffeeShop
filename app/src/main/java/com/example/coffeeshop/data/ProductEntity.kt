@@ -2,8 +2,8 @@ package com.example.coffeeshop.data
 
 import androidx.annotation.DrawableRes
 import com.example.coffeeshop.domain.Product
-import com.example.coffeeshop.domain.ProductVariant
 import com.example.coffeeshop.domain.ProductSize
+import com.example.coffeeshop.domain.ProductVariant
 
 data class ProductEntity(
     val id: Int,
@@ -12,15 +12,18 @@ data class ProductEntity(
     @DrawableRes val image: Int,
     val variants: List<ProductVariantEntity>,
     val rating: Float,
+    val description: String,
 )
 
 data class ProductVariantEntity(
+    val id: Int,
     val size: ProductSizeEntity,
     val price: Float,
 )
 
 fun ProductVariantEntity.toDomain(): ProductVariant {
     return ProductVariant(
+        id = id,
         size = size.toDomain(),
         price = price
     )
@@ -47,6 +50,7 @@ fun ProductEntity.toDomain(): Product {
         category = category,
         image = image,
         variants = variants.map { it.toDomain() },
-        rating = rating
+        rating = rating,
+        description = description
     )
 }

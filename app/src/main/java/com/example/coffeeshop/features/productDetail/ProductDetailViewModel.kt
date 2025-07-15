@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.domain.GetProductUseCase
 import com.example.coffeeshop.domain.ProductVariant
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -20,9 +22,10 @@ class ProductDetailViewModel @Inject constructor(
     private val getProductUseCase: GetProductUseCase,
 ) : ViewModel() {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val product = savedStateHandle
         .getStateFlow("productId", -1)
-        .flatMapConcat { getProductUseCase(it) }
+        .flatMapLatest { getProductUseCase(it) }
 
     private val selectedVariant = MutableStateFlow<ProductVariant?>(null)
 

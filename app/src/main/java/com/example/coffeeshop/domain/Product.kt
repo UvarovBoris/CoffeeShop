@@ -10,9 +10,11 @@ data class Product(
     @DrawableRes val image: Int,
     val variants: List<ProductVariant>,
     val rating: Float,
+    val description: String,
 )
 
 data class ProductVariant(
+    val id: Int,
     val size: ProductSize,
     val price: Float,
 )

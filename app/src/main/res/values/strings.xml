@@ -9,6 +9,7 @@
     <string name="home_top_search_hint">Search coffee</string>
 
     <string name="product_detail_title">Detail</string>
+    <string name="product_detail_description_title">Description</string>
     <string name="product_detail_size_title">Size</string>
     <string name="product_detail_price">Price</string>
     <string name="product_detail_buy_button">Buy Now</string>

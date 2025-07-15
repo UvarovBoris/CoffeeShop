@@ -25,9 +25,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
+import com.example.coffeeshop.domain.ProductSize.Large
+import com.example.coffeeshop.domain.ProductSize.Medium
+import com.example.coffeeshop.domain.ProductSize.Small
 import com.example.coffeeshop.domain.ProductVariant
-import com.example.coffeeshop.domain.ProductSize
-import com.example.coffeeshop.domain.ProductSize.*
 import com.example.coffeeshop.presentation.sizeName
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.BrownLight
@@ -128,9 +129,9 @@ fun SizeItem(
 @Composable
 fun SizeSectionPreview() {
     val items = listOf(
-        ProductVariant(Small, 2.99f),
-        ProductVariant(Medium, 3.49f),
-        ProductVariant(Large, 3.99f)
+        ProductVariant(0, Small, 2.99f),
+        ProductVariant(1, Medium, 3.49f),
+        ProductVariant(2, Large, 3.99f)
     )
     SizeSection(
         items = items,

@@ -112,6 +112,8 @@ fun ProductDetailScreen(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
             )
+            Spacer(Modifier.height(16.dp))
+            DescriptionSection(product)
             Spacer(modifier = Modifier.weight(1f))
             SizeSection(
                 product.variants,

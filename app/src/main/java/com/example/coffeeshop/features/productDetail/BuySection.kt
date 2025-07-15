@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.R
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
-import com.example.coffeeshop.domain.Product
 import com.example.coffeeshop.domain.ProductVariant
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLightHover
@@ -56,7 +55,7 @@ fun BuySection(
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column {
+        Column(Modifier.width(76.dp)) {
             Text(
                 text = stringResource(R.string.product_detail_price),
                 color = GreyLightHover,

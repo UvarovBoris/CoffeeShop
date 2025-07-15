@@ -9,10 +9,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.R
 import com.example.coffeeshop.common.presentation.TopBar
 import com.example.coffeeshop.ui.SetStatusBarTextColor
@@ -20,6 +25,19 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun OrderScreen(
+    viewModel: OrderViewModel,
+    onBackClick: () -> Unit,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    OrderScreen(
+        state = state,
+        onBackClick = onBackClick
+    )
+}
+
+@Composable
+fun OrderScreen(
+    state: OrderState,
     onBackClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
@@ -43,9 +61,12 @@ fun OrderScreen(
                     top = padding.calculateTopPadding()
                 )
         ) {
+            var selectedTab by rememberSaveable { mutableIntStateOf(0) }
             Spacer(Modifier.height(24.dp))
             SlidingTabs(
                 tabs = listOf("Deliver", "Pick Up"),
+                selectedTab = selectedTab,
+                onTabSelect = { selectedTab = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(43.dp)
@@ -57,5 +78,8 @@ fun OrderScreen(
 @Preview
 @Composable
 fun OrderScreenPreview() {
-    OrderScreen(onBackClick = {})
+    OrderScreen(
+        state = OrderState.Success,
+        onBackClick = {}
+    )
 }

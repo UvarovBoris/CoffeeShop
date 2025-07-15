@@ -1,6 +1,7 @@
 package com.example.coffeeshop.features.order
 
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,10 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +29,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.ui.theme.Brown
@@ -42,17 +42,18 @@ import com.example.coffeeshop.ui.toDp
 @Composable
 fun SlidingTabs(
     tabs: List<String>,
+    selectedTab: Int,
+    onTabSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val density = LocalDensity.current
-    val tabMeta = remember { mutableStateMapOf<Int, Rect>() }
-    var selectedTab by remember { mutableIntStateOf(0) }
+    val tabRect = remember { mutableStateMapOf<Int, Rect>() }
 
-    val targetRect = tabMeta[selectedTab]
+    val targetRect = tabRect[selectedTab]
     val tabWidth = targetRect?.width?.toDp(density) ?: 0.dp
 
-    val tabLeft by animateDpAsState(
-        targetValue = targetRect?.left?.toDp(density) ?: 0.dp,
+    val tabLeft by animateIntAsState(
+        targetValue = targetRect?.left?.toInt() ?: 0,
         label = "leftAnimation"
     )
 
@@ -68,7 +69,7 @@ fun SlidingTabs(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(tabWidth)
-                .offset(x = tabLeft)
+                .offset { IntOffset(x = tabLeft, y = 0) }
                 .background(
                     color = Brown,
                     shape = RoundedCornerShape(8.dp)
@@ -83,8 +84,8 @@ fun SlidingTabs(
                     text = tab,
                     isSelected = index == selectedTab,
                     modifier = Modifier.weight(1f),
-                    onClick = { selectedTab = index },
-                    onLayout = { rect -> tabMeta[index] = rect }
+                    onClick = { onTabSelect.invoke(index) },
+                    onLayout = { rect -> tabRect[index] = rect }
                 )
             }
         }
@@ -112,9 +113,12 @@ fun Tab(
                     onLayout.invoke(rect)
                 }
         ) {
+            val textColor by animateColorAsState(
+                targetValue = if (isSelected) SurfaceWhite else GreyNormalActive
+            )
             Text(
                 text = text,
-                color = if (isSelected) SurfaceWhite else GreyNormalActive,
+                color = textColor,
                 fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
                 fontSize = 16.sp,
                 lineHeight = 19.2.sp
@@ -128,6 +132,8 @@ fun Tab(
 fun SlidingTabsPreview() {
     SlidingTabs(
         tabs = listOf("Tab 1", "Tab 2"),
+        selectedTab = 0,
+        onTabSelect = {},
         modifier = Modifier.height(43.dp)
     )
 }

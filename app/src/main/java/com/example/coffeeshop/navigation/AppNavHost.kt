@@ -14,6 +14,7 @@ import com.example.coffeeshop.features.main.MainScreen
 import com.example.coffeeshop.features.onboarding.OnboardingScreen
 import com.example.coffeeshop.features.onboarding.OnboardingViewModel
 import com.example.coffeeshop.features.order.OrderScreen
+import com.example.coffeeshop.features.order.OrderViewModel
 import com.example.coffeeshop.features.productDetail.ProductDetailScreen
 import com.example.coffeeshop.features.productDetail.ProductDetailViewModel
 
@@ -89,7 +90,9 @@ fun AppNavHost(
                 slideOutHorizontally(targetOffsetX = { fullWidth -> fullWidth })
             }
         ) {
+            val viewModel = hiltViewModel<OrderViewModel>()
             OrderScreen(
+                viewModel = viewModel,
                 onBackClick = { navController.popBackStack() }
             )
         }

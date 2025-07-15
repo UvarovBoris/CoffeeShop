@@ -56,9 +56,6 @@ fun ProductDetailScreen(
     SetStatusBarTextColor(isDark = true)
     val product = if (state is ProductDetailState.Success) state.product else null
     val selectedVariant = if (state is ProductDetailState.Success) state.selectedVariant else null
-    if (product == null || selectedVariant == null) {
-        return
-    }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -76,10 +73,12 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            BuySection(
-                variant = selectedVariant,
-                onBuyClick = onBuyClick
-            )
+            selectedVariant?.let {
+                BuySection(
+                    variant = selectedVariant,
+                    onBuyClick = onBuyClick
+                )
+            }
         }
     ) { padding ->
         Column(
@@ -93,34 +92,36 @@ fun ProductDetailScreen(
                     bottom = padding.calculateBottomPadding()
                 )
         ) {
-            Spacer(Modifier.height(24.dp))
-            AsyncImage(
-                model = product.image,
-                contentDescription = "Product image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(327f / 202f)
-                    .clip(RoundedCornerShape(16.dp))
-            )
-            Spacer(Modifier.height(16.dp))
-            DetailSection(product = product)
-            Spacer(Modifier.height(16.dp))
-            HorizontalDivider(
-                thickness = 1.dp,
-                color = SurfaceLightActive,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-            )
-            Spacer(Modifier.height(16.dp))
-            DescriptionSection(product)
-            Spacer(modifier = Modifier.weight(1f))
-            SizeSection(
-                product.variants,
-                selectedVariant,
-                onItemSelect = onVariantSelect
-            )
-            Spacer(modifier = Modifier.height(24.dp))
+            if (product != null && selectedVariant != null) {
+                Spacer(Modifier.height(24.dp))
+                AsyncImage(
+                    model = product.image,
+                    contentDescription = "Product image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(327f / 202f)
+                        .clip(RoundedCornerShape(16.dp))
+                )
+                Spacer(Modifier.height(16.dp))
+                DetailSection(product = product)
+                Spacer(Modifier.height(16.dp))
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = SurfaceLightActive,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                )
+                Spacer(Modifier.height(16.dp))
+                DescriptionSection(product)
+                Spacer(modifier = Modifier.weight(1f))
+                SizeSection(
+                    product.variants,
+                    selectedVariant,
+                    onItemSelect = onVariantSelect
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
 }

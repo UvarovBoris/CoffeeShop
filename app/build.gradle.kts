@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.coffeeshop"
+    namespace = "com.uvarov.coffeeshop"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.coffeeshop"
+        applicationId = "com.uvarov.coffeeshop"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

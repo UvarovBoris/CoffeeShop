@@ -2,7 +2,7 @@ package com.uvarov.coffeeshop.features.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uvarov.coffeeshop.data.SettingsRepository
+import com.uvarov.coffeeshop.common.data.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

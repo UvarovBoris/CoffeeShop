@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.domain.Product
+import com.uvarov.coffeeshop.common.domain.product.Product
 
 @Composable
 fun MainScreen(

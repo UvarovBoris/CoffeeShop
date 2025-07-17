@@ -31,9 +31,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uvarov.coffeeshop.common.utils.safeLet
-import com.uvarov.coffeeshop.ui.theme.Brown
-import com.uvarov.coffeeshop.ui.theme.GreyLighter
-import com.uvarov.coffeeshop.ui.theme.RippleBrown
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.GreyLighter
+import com.uvarov.coffeeshop.common.presentation.theme.RippleBrown
 
 @Composable
 fun BottomBar(

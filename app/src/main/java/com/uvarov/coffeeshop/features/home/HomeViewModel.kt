@@ -2,8 +2,8 @@ package com.uvarov.coffeeshop.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uvarov.coffeeshop.data.Category
-import com.uvarov.coffeeshop.domain.GetAllProductsUseCase
+import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.domain.product.GetAllProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +18,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val searchText = MutableStateFlow("")
-    private val selectedCategory = MutableStateFlow(Category.AllCoffee)
+    private val selectedCategory = MutableStateFlow(ProductCategory.AllCoffee)
     private val allProducts = getAllProductsUseCase()
 
     val state: StateFlow<HomeState> = combine(
@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
     ) { searchText, selectedCategory, allProducts ->
         val filteredProducts = allProducts
             .filter { searchText.isBlank() || it.name.contains(searchText, ignoreCase = true) }
-            .filter { selectedCategory == Category.AllCoffee || it.category == selectedCategory }
+            .filter { selectedCategory == ProductCategory.AllCoffee || it.category == selectedCategory }
         HomeState(
             searchText = searchText,
             category = selectedCategory,
@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
         HomeState()
     )
 
-    fun onCategorySelect(category: Category) {
+    fun onCategorySelect(category: ProductCategory) {
         selectedCategory.value = category
     }
 

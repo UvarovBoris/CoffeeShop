@@ -20,12 +20,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
-import com.uvarov.coffeeshop.data.Category
-import com.uvarov.coffeeshop.data.testCategories
-import com.uvarov.coffeeshop.data.testProducts
-import com.uvarov.coffeeshop.data.toDomain
-import com.uvarov.coffeeshop.domain.Product
-import com.uvarov.coffeeshop.ui.theme.SurfaceLight
+import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.data.testCategories
+import com.uvarov.coffeeshop.common.data.testProducts
+import com.uvarov.coffeeshop.common.data.product.toDomain
+import com.uvarov.coffeeshop.common.domain.product.Product
+import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 
 @Composable
 fun HomeScreen(
@@ -53,7 +53,7 @@ fun HomeScreen(
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
     onSearchTextChange: (String) -> Unit,
-    onCategorySelect: (Category) -> Unit,
+    onCategorySelect: (ProductCategory) -> Unit,
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(

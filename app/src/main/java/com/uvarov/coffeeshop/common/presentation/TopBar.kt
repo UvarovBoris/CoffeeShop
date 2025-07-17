@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.ui.theme.CoffeeTheme
-import com.uvarov.coffeeshop.ui.theme.SurfaceLight
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
+import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 
 @Composable
 fun TopBar(

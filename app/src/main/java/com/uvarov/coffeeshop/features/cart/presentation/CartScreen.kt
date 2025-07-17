@@ -1,10 +1,12 @@
-package com.uvarov.coffeeshop.features.profile
+package com.uvarov.coffeeshop.features.cart.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,8 +15,9 @@ import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 
 @Composable
-fun ProfileScreen(
+fun CartScreen(
     padding: PaddingValues,
+    onOrderClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
     Column(
@@ -27,6 +30,9 @@ fun ProfileScreen(
                 top = padding.calculateTopPadding()
             )
     ) {
+        Button(onClick = onOrderClick) {
+            Text(text = "Order")
+        }
     }
 }
 
@@ -35,8 +41,9 @@ fun ProfileScreen(
     heightDp = 800
 )
 @Composable
-fun ProfileScreenPreview() {
-    ProfileScreen(
-        padding = PaddingValues(0.dp)
+fun PurchasesScreenPreview() {
+    CartScreen(
+        padding = PaddingValues(0.dp),
+        onOrderClick = {}
     )
 }

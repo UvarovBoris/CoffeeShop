@@ -20,20 +20,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.uvarov.coffeeshop.data.Category
-import com.uvarov.coffeeshop.data.testCategories
-import com.uvarov.coffeeshop.presentation.categoryName
-import com.uvarov.coffeeshop.ui.theme.Brown
-import com.uvarov.coffeeshop.ui.theme.GreyNormal
-import com.uvarov.coffeeshop.ui.theme.RippleBrown
-import com.uvarov.coffeeshop.ui.theme.SoraFontFamily
+import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.data.testCategories
+import com.uvarov.coffeeshop.common.presentation.utils.categoryName
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.GreyNormal
+import com.uvarov.coffeeshop.common.presentation.theme.RippleBrown
+import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
 
 @Composable
 fun CategoriesSection(
-    categories: List<Category>,
-    selectedCategory: Category,
+    categories: List<ProductCategory>,
+    selectedCategory: ProductCategory,
     modifier: Modifier = Modifier,
-    onCategorySelected: (Category) -> Unit,
+    onCategorySelected: (ProductCategory) -> Unit,
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
@@ -56,9 +56,9 @@ fun CategoriesSection(
 
 @Composable
 fun CategoryItem(
-    category: Category,
+    category: ProductCategory,
     isSelected: Boolean,
-    onClick: (Category) -> Unit,
+    onClick: (ProductCategory) -> Unit,
 ) {
     Text(
         text = categoryName(category),

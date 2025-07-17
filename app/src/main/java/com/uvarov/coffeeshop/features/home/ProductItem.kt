@@ -28,16 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.data.testProducts
-import com.uvarov.coffeeshop.data.toDomain
-import com.uvarov.coffeeshop.domain.Product
-import com.uvarov.coffeeshop.presentation.categoryName
-import com.uvarov.coffeeshop.ui.theme.Black
-import com.uvarov.coffeeshop.ui.theme.Brown
-import com.uvarov.coffeeshop.ui.theme.GreyLighter
-import com.uvarov.coffeeshop.ui.theme.GreyNormal
-import com.uvarov.coffeeshop.ui.theme.SoraFontFamily
-import com.uvarov.coffeeshop.ui.theme.SurfaceWhite
+import com.uvarov.coffeeshop.common.data.testProducts
+import com.uvarov.coffeeshop.common.data.product.toDomain
+import com.uvarov.coffeeshop.common.domain.product.Product
+import com.uvarov.coffeeshop.common.presentation.utils.categoryName
+import com.uvarov.coffeeshop.common.presentation.theme.Black
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.GreyLighter
+import com.uvarov.coffeeshop.common.presentation.theme.GreyNormal
+import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
+import com.uvarov.coffeeshop.common.presentation.theme.SurfaceWhite
 
 @Composable
 fun ProductItem(

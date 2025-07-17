@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.uvarov.coffeeshop.navigation.AppNavHost
-import com.uvarov.coffeeshop.ui.theme.CoffeeShopTheme
+import com.uvarov.coffeeshop.common.navigation.AppNavHost
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeShopTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,11 +1,11 @@
 package com.uvarov.coffeeshop.features.home
 
-import com.uvarov.coffeeshop.data.Category
-import com.uvarov.coffeeshop.domain.Product
+import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.domain.product.Product
 
 data class HomeState(
     val searchText: String = "",
-    val category: Category = Category.AllCoffee,
+    val category: ProductCategory = ProductCategory.AllCoffee,
     val productsState: ProductsState = ProductsState.Loading,
 )
 

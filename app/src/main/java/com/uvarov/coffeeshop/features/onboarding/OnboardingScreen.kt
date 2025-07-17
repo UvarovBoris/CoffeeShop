@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvarov.coffeeshop.R
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
-import com.uvarov.coffeeshop.ui.theme.Black
-import com.uvarov.coffeeshop.ui.theme.SoraFontFamily
-import com.uvarov.coffeeshop.ui.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.Black
+import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
 
 @Composable
 fun OnboardingScreen(

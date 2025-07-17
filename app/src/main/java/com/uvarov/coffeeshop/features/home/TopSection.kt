@@ -31,13 +31,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.ui.theme.Brown
-import com.uvarov.coffeeshop.ui.theme.GreyLighter
-import com.uvarov.coffeeshop.ui.theme.GreyNormal
-import com.uvarov.coffeeshop.ui.theme.GreyNormalHover
-import com.uvarov.coffeeshop.ui.theme.SoraFontFamily
-import com.uvarov.coffeeshop.ui.theme.SurfaceNormalActive
-import com.uvarov.coffeeshop.ui.theme.SurfaceWhite
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.GreyLighter
+import com.uvarov.coffeeshop.common.presentation.theme.GreyNormal
+import com.uvarov.coffeeshop.common.presentation.theme.GreyNormalHover
+import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
+import com.uvarov.coffeeshop.common.presentation.theme.SurfaceNormalActive
+import com.uvarov.coffeeshop.common.presentation.theme.SurfaceWhite
 
 @Composable
 fun TopSection(

@@ -2,9 +2,9 @@ package com.uvarov.coffeeshop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uvarov.coffeeshop.data.SettingsRepository
-import com.uvarov.coffeeshop.navigation.Main
-import com.uvarov.coffeeshop.navigation.Onboarding
+import com.uvarov.coffeeshop.common.data.SettingsRepository
+import com.uvarov.coffeeshop.common.navigation.Main
+import com.uvarov.coffeeshop.common.navigation.Onboarding
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first

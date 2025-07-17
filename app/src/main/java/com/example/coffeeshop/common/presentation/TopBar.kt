@@ -1,5 +1,6 @@
 package com.example.coffeeshop.common.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.R
 import com.example.coffeeshop.ui.theme.CoffeeTheme
+import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
 fun TopBar(
@@ -30,6 +32,7 @@ fun TopBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .background(color = SurfaceLight)
             .padding(
                 top = 24.dp + statusBarTopPadding,
                 start = 24.dp,

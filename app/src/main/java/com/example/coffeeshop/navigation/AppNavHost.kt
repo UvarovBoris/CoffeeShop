@@ -96,7 +96,8 @@ fun AppNavHost(
             val viewModel = hiltViewModel<OrderViewModel>()
             OrderScreen(
                 viewModel = viewModel,
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onOrderClick = {}
             )
         }
     }

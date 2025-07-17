@@ -32,4 +32,12 @@ object CoffeeTypography {
         fontFamily = SoraFontFamily,
         lineHeight = 24.sp,
     )
+
+    val buttonText = TextStyle(
+        color = SurfaceWhite,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontFamily = SoraFontFamily,
+        lineHeight = 24.sp
+    )
 }

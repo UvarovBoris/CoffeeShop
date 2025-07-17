@@ -19,6 +19,7 @@
     <string name="product_detail_buy_button">Buy Now</string>
 
     <string name="order_name">Order</string>
+    <string name="order_payment_button">Order</string>
 
     <string name="all_coffee">All Coffee</string>
     <string name="macchiato">Macchiato</string>

@@ -27,18 +27,21 @@ import com.example.coffeeshop.ui.theme.SurfaceLight
 fun OrderScreen(
     viewModel: OrderViewModel,
     onBackClick: () -> Unit,
+    onOrderClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     OrderScreen(
         state = state,
-        onBackClick = onBackClick
+        onBackClick = onBackClick,
+        onOrderClick = onOrderClick
     )
 }
 
 @Composable
 fun OrderScreen(
     state: OrderState,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit = {},
+    onOrderClick: () -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = true)
     Scaffold(
@@ -48,6 +51,11 @@ fun OrderScreen(
                 title = stringResource(R.string.order_name),
                 needBack = true,
                 onBackClick = onBackClick
+            )
+        },
+        bottomBar = {
+            PaymentSection(
+                onOrderClick = onOrderClick
             )
         }
     ) { padding ->
@@ -79,7 +87,6 @@ fun OrderScreen(
 @Composable
 fun OrderScreenPreview() {
     OrderScreen(
-        state = OrderState.Success,
-        onBackClick = {}
+        state = OrderState.Success
     )
 }

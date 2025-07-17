@@ -57,7 +57,7 @@ private fun navigateToBottomBarDestination(
 val bottomBarItems = listOf(
     BottomBarItemData(Home, R.drawable.home, R.drawable.home_filled),
     BottomBarItemData(Favorites, R.drawable.heart, R.drawable.heart_filled),
-    BottomBarItemData(Cart, R.drawable.bag, R.drawable.bag_filled),
+    BottomBarItemData(Cart, R.drawable.cart, R.drawable.cart_filled),
     BottomBarItemData(Profile, R.drawable.profile, R.drawable.profile_filled)
 )
 

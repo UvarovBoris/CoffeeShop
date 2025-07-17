@@ -1,5 +1,6 @@
 package com.example.coffeeshop.features.main
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.coffeeshop.common.utils.safeLet
 import com.example.coffeeshop.ui.theme.Brown
 import com.example.coffeeshop.ui.theme.GreyLighter
 import com.example.coffeeshop.ui.theme.RippleBrown
@@ -64,8 +66,10 @@ fun BottomBar(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             items.forEach { data ->
-                val destinationName = data.destination::class.simpleName
-                val isSelected = currentDestination?.contains(destinationName ?: "") == true
+                val itemDestination = data.destination::class.simpleName
+                val isSelected = safeLet(currentDestination, itemDestination) { currentDestinationSafe, itemDestinationSafe ->
+                    currentDestinationSafe.contains(itemDestinationSafe)
+                }
                 BottomBarItem(
                     data = data,
                     isSelected = isSelected,
@@ -79,39 +83,75 @@ fun BottomBar(
 @Composable
 fun BottomBarItem(
     data: BottomBarItemData,
-    isSelected: Boolean,
+    isSelected: Boolean?,
     modifier: Modifier = Modifier,
     onItemSelect: (BottomBarItemData) -> Unit,
 ) {
     @OptIn(ExperimentalMaterial3Api::class)
     CompositionLocalProvider(LocalRippleConfiguration provides RippleBrown) {
-        Column(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = modifier
                 .size(width = 48.dp, height = 48.dp)
                 .clip(CircleShape)
-                .clickable { onItemSelect(data) },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                .clickable { onItemSelect(data) }
         ) {
-            Icon(
-                painter = painterResource(id = if (isSelected) data.iconSelected else data.icon),
-                tint = if (isSelected) Brown else GreyLighter,
-                contentDescription = null
-            )
-            Spacer(
-                modifier = Modifier.height(if (isSelected) 6.dp else 11.dp)
-            )
-            if (isSelected) {
-                Box(
-                    modifier = Modifier
-                        .size(width = 10.dp, height = 5.dp)
-                        .background(
-                            color = Brown,
-                            shape = RoundedCornerShape(18.dp)
-                        )
-                )
+            isSelected?.let {
+                Crossfade(isSelected) { isSelected ->
+                    if (isSelected) {
+                        SelectedIcon(data)
+                    } else {
+                        UnselectedIcon(data)
+                    }
+                }
+            } ?: run {
+                UnselectedIcon(data)
             }
         }
+    }
+}
+
+@Composable
+fun SelectedIcon(
+    data: BottomBarItemData,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            painter = painterResource(id = data.iconSelected),
+            tint = Brown,
+            contentDescription = null
+        )
+        Spacer(
+            modifier = Modifier.height(6.dp)
+        )
+        Box(
+            modifier = Modifier
+                .size(width = 10.dp, height = 5.dp)
+                .background(
+                    color = Brown,
+                    shape = RoundedCornerShape(18.dp)
+                )
+        )
+    }
+}
+
+@Composable
+fun UnselectedIcon(
+    data: BottomBarItemData,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            painter = painterResource(id = data.icon),
+            tint = GreyLighter,
+            contentDescription = null
+        )
+        Spacer(
+            modifier = Modifier.height(11.dp)
+        )
     }
 }
 

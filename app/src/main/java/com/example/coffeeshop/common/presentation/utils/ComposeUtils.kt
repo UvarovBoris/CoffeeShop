@@ -1,4 +1,4 @@
-package com.example.coffeeshop.ui
+package com.example.coffeeshop.common.presentation.utils
 
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp

@@ -1,4 +1,4 @@
-package com.example.coffeeshop.ui
+package com.example.coffeeshop.common.presentation.utils
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable

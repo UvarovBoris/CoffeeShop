@@ -37,7 +37,7 @@ import com.example.coffeeshop.ui.theme.GreyNormalActive
 import com.example.coffeeshop.ui.theme.RippleBrown
 import com.example.coffeeshop.ui.theme.SurfaceWhite
 import com.example.coffeeshop.ui.theme.SurfaceWhiteActive
-import com.example.coffeeshop.ui.toDp
+import com.example.coffeeshop.common.presentation.utils.toDp
 
 @Composable
 fun SlidingTabs(

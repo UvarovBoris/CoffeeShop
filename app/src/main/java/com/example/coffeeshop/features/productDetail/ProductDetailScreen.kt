@@ -27,7 +27,7 @@ import com.example.coffeeshop.common.presentation.TopBarButton
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.ProductVariant
-import com.example.coffeeshop.ui.SetStatusBarTextColor
+import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 import com.example.coffeeshop.ui.theme.SurfaceLightActive
 

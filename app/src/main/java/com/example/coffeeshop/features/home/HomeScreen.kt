@@ -23,7 +23,7 @@ import com.example.coffeeshop.data.testCategories
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
-import com.example.coffeeshop.ui.SetStatusBarTextColor
+import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable

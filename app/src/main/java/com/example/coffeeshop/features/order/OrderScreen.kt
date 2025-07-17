@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.coffeeshop.R
 import com.example.coffeeshop.common.presentation.TopBar
-import com.example.coffeeshop.ui.SetStatusBarTextColor
+import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable

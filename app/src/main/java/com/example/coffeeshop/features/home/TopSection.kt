@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -110,7 +111,11 @@ fun TopSection(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
-                    errorIndicatorColor = Color.Transparent
+                    errorIndicatorColor = Color.Transparent,
+                    textSelectionColors = TextSelectionColors(
+                        handleColor = SurfaceWhite,
+                        backgroundColor = SurfaceWhite.copy(alpha = 0.4f)
+                    )
                 ),
                 modifier = Modifier
                     .weight(1f)

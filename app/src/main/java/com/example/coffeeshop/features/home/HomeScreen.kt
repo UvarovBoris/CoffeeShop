@@ -15,15 +15,16 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.data.Category
 import com.example.coffeeshop.data.testCategories
 import com.example.coffeeshop.data.testProducts
 import com.example.coffeeshop.data.toDomain
 import com.example.coffeeshop.domain.Product
-import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
@@ -82,13 +83,16 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .clipToBounds(),
             contentPadding = PaddingValues(
                 start = 24.dp,
                 end = 24.dp,
-                bottom = padding.calculateBottomPadding()
+                bottom = padding.calculateBottomPadding() + 24.dp
             ),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             if (state.productsState is ProductsState.Success) {
                 items(
@@ -97,7 +101,7 @@ fun HomeScreen(
                 ) { item ->
                     ProductItem(
                         item,
-                        modifier = Modifier.padding(bottom = 24.dp),
+                        modifier = Modifier.animateItem(),
                         onClick = onProductClick
                     )
                 }

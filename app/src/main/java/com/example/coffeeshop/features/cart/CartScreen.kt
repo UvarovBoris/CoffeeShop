@@ -1,10 +1,11 @@
-package com.example.coffeeshop.features.notifications
+package com.example.coffeeshop.features.cart
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,17 +15,24 @@ import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
-fun NotificationsScreen(
+fun CartScreen(
     padding: PaddingValues,
+    onOrderClick: () -> Unit,
 ) {
     SetStatusBarTextColor(isDark = true)
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = SurfaceLight)
-            .padding(horizontal = 24.dp)
+            .padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = padding.calculateTopPadding()
+            )
     ) {
-        Text(text = "Notifications")
+        Button(onClick = onOrderClick) {
+            Text(text = "Order")
+        }
     }
 }
 
@@ -33,8 +41,9 @@ fun NotificationsScreen(
     heightDp = 800
 )
 @Composable
-fun NotificationsScreenPreview() {
-    NotificationsScreen(
-        padding = PaddingValues(0.dp)
+fun PurchasesScreenPreview() {
+    CartScreen(
+        padding = PaddingValues(0.dp),
+        onOrderClick = {}
     )
 }

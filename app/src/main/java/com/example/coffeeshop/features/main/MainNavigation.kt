@@ -9,7 +9,7 @@ object Home
 object Favorites
 
 @Serializable
-object Purchases
+object Cart
 
 @Serializable
-object Notifications
+object Profile

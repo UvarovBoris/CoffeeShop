@@ -16,6 +16,7 @@ import com.example.coffeeshop.domain.Product
 fun MainScreen(
     navController: NavHostController = rememberNavController(),
     onProductClick: (Product) -> Unit,
+    onOrderClick: () -> Unit,
 ) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
@@ -27,29 +28,37 @@ fun MainScreen(
                 items = bottomBarItems,
                 currentRoute
             ) { bottomBarItemData ->
-                navController.navigate(bottomBarItemData.destination) {
-                    popUpTo(navController.graph.startDestinationId) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
+                navigateToBottomBarDestination(navController, bottomBarItemData)
             }
         }
     ) { padding ->
         MainNavHost(
             navController = navController,
             padding = padding,
-            onProductClick = onProductClick
+            onProductClick = onProductClick,
+            onOrderClick = onOrderClick
         )
+    }
+}
+
+private fun navigateToBottomBarDestination(
+    navController: NavHostController,
+    bottomBarItemData: BottomBarItemData,
+) {
+    navController.navigate(bottomBarItemData.destination) {
+        popUpTo(navController.graph.startDestinationId) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
     }
 }
 
 val bottomBarItems = listOf(
     BottomBarItemData(Home, R.drawable.home, R.drawable.home_filled),
     BottomBarItemData(Favorites, R.drawable.heart, R.drawable.heart_filled),
-    BottomBarItemData(Purchases, R.drawable.bag, R.drawable.bag_filled),
-    BottomBarItemData(Notifications, R.drawable.notification, R.drawable.notification_filled)
+    BottomBarItemData(Cart, R.drawable.bag, R.drawable.bag_filled),
+    BottomBarItemData(Profile, R.drawable.profile, R.drawable.profile_filled)
 )
 
 @Preview(
@@ -60,6 +69,7 @@ val bottomBarItems = listOf(
 fun HomeScreenPreview() {
     MainScreen(
         rememberNavController(),
-        onProductClick = {}
+        onProductClick = {},
+        onOrderClick = {}
     )
 }

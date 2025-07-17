@@ -1,11 +1,10 @@
-package com.example.coffeeshop.features.purchases
+package com.example.coffeeshop.features.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,17 +13,20 @@ import com.example.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.example.coffeeshop.ui.theme.SurfaceLight
 
 @Composable
-fun PurchasesScreen(
-    padding: PaddingValues
+fun ProfileScreen(
+    padding: PaddingValues,
 ) {
     SetStatusBarTextColor(isDark = true)
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = SurfaceLight)
-            .padding(horizontal = 24.dp)
+            .padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = padding.calculateTopPadding()
+            )
     ) {
-        Text(text = "Purchases")
     }
 }
 
@@ -33,8 +35,8 @@ fun PurchasesScreen(
     heightDp = 800
 )
 @Composable
-fun PurchasesScreenPreview() {
-    PurchasesScreen(
+fun ProfileScreenPreview() {
+    ProfileScreen(
         padding = PaddingValues(0.dp)
     )
 }

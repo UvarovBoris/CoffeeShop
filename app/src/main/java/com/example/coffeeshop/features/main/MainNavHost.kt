@@ -7,18 +7,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.coffeeshop.domain.Product
+import com.example.coffeeshop.features.cart.CartScreen
 import com.example.coffeeshop.features.favorites.FavoritesScreen
 import com.example.coffeeshop.features.favorites.FavoritesViewModel
 import com.example.coffeeshop.features.home.HomeScreen
 import com.example.coffeeshop.features.home.HomeViewModel
-import com.example.coffeeshop.features.notifications.NotificationsScreen
-import com.example.coffeeshop.features.purchases.PurchasesScreen
+import com.example.coffeeshop.features.profile.ProfileScreen
 
 @Composable
 fun MainNavHost(
     navController: NavHostController,
     padding: PaddingValues,
     onProductClick: (Product) -> Unit,
+    onOrderClick: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -40,11 +41,14 @@ fun MainNavHost(
                 onProductClick = onProductClick
             )
         }
-        composable<Purchases> {
-            PurchasesScreen(padding)
+        composable<Cart> {
+            CartScreen(
+                padding,
+                onOrderClick = onOrderClick
+            )
         }
-        composable<Notifications> {
-            NotificationsScreen(padding)
+        composable<Profile> {
+            ProfileScreen(padding)
         }
     }
 }

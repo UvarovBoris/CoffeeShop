@@ -52,6 +52,9 @@ fun AppNavHost(
             MainScreen(
                 onProductClick = { product ->
                     navController.navigate(ProductDetail(product.id))
+                },
+                onOrderClick = {
+                    navController.navigate(Order)
                 }
             )
         }

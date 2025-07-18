@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uvarov.coffeeshop.R
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
+import com.uvarov.coffeeshop.common.domain.product.Product
 import com.uvarov.coffeeshop.common.presentation.SectionDivider
 import com.uvarov.coffeeshop.common.presentation.TopBar
 import com.uvarov.coffeeshop.common.presentation.cart.CartItem
@@ -39,7 +40,9 @@ fun OrderScreen(
     OrderScreen(
         state = state,
         onBackClick = onBackClick,
-        onOrderClick = onOrderClick
+        onOrderClick = onOrderClick,
+        onAddToCartClick = viewModel::onAddToCartClick,
+        onRemoveFromCartClick = viewModel::onRemoveFromCartClick
     )
 }
 
@@ -48,6 +51,8 @@ fun OrderScreen(
     state: OrderState,
     onBackClick: () -> Unit = {},
     onOrderClick: () -> Unit = {},
+    onAddToCartClick: (Product) -> Unit = {},
+    onRemoveFromCartClick: (Product) -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = true)
     Scaffold(
@@ -94,7 +99,9 @@ fun OrderScreen(
                 CartItem(
                     product = product,
                     quantity = quantity,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    onPlusClick = onAddToCartClick,
+                    onMinusClick = onRemoveFromCartClick
                 )
             }
             Spacer(Modifier.height(16.dp))

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
+import com.uvarov.coffeeshop.common.domain.product.Product
 import com.uvarov.coffeeshop.common.presentation.cart.CartItem
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
@@ -31,7 +32,9 @@ fun CartScreen(
     CartScreen(
         state = state,
         padding = padding,
-        onOrderClick = onOrderClick
+        onOrderClick = onOrderClick,
+        onAddToCartClick = viewModel::onAddToCartClick,
+        onRemoveFromCartClick = viewModel::onRemoveFromCartClick
     )
 }
 
@@ -40,6 +43,8 @@ fun CartScreen(
 fun CartScreen(
     state: CartState,
     padding: PaddingValues,
+    onAddToCartClick: (Product) -> Unit = {},
+    onRemoveFromCartClick: (Product) -> Unit = {},
     onOrderClick: () -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = true)
@@ -55,7 +60,12 @@ fun CartScreen(
     ) {
         val products = if (state is CartState.Success) state.products else emptyMap()
         products.forEach { (product, quantity) ->
-            CartItem(product, quantity)
+            CartItem(
+                product,
+                quantity,
+                onPlusClick = onAddToCartClick,
+                onMinusClick = onRemoveFromCartClick
+            )
             Spacer(Modifier.height(16.dp))
         }
         Button(onClick = onOrderClick) {

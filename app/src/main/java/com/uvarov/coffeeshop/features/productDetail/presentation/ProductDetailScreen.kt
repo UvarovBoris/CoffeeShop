@@ -2,8 +2,6 @@ package com.uvarov.coffeeshop.features.productDetail.presentation
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -33,6 +31,7 @@ import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
 import com.uvarov.coffeeshop.common.presentation.TopBar
+import com.uvarov.coffeeshop.common.presentation.TopBarButton
 import com.uvarov.coffeeshop.common.presentation.theme.Brown
 import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
@@ -136,11 +135,8 @@ fun ProductDetailScreen(
 
 @Composable
 private fun FavoritesButton(isFavorite: Boolean, onFavoritesClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(12.dp))
-            .clickable(onClick = onFavoritesClick)
-            .padding(10.dp)
+    TopBarButton(
+        onClick = onFavoritesClick
     ) {
         Crossfade(isFavorite) {
             if (it) {

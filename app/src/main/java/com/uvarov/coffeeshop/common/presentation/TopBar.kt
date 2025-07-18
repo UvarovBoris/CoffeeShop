@@ -41,7 +41,7 @@ fun TopBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (needBack) {
-            TopBarButton(
+            TopBarIconButton(
                 icon = R.drawable.arrow_left,
                 contentDescription = "Back",
                 onClick = { onBackClick?.invoke() }

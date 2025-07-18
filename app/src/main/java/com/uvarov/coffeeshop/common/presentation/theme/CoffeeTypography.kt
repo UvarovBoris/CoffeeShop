@@ -25,12 +25,19 @@ object CoffeeTypography {
         lineHeight = 19.2.sp,
     )
 
-    val detailSectionTitle = TextStyle(
+    val sectionTitle = TextStyle(
         color = CoffeeColor.title,
         fontSize = 16.sp,
         fontWeight = FontWeight.SemiBold,
         fontFamily = SoraFontFamily,
         lineHeight = 24.sp,
+    )
+
+    val categoryName = TextStyle(
+        color = GreyLighter,
+        fontSize = 12.sp,
+        fontFamily = SoraFontFamily,
+        lineHeight = 14.4.sp,
     )
 
     val buttonText = TextStyle(

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -30,12 +29,12 @@ import com.uvarov.coffeeshop.R
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
+import com.uvarov.coffeeshop.common.presentation.SectionDivider
 import com.uvarov.coffeeshop.common.presentation.TopBar
 import com.uvarov.coffeeshop.common.presentation.TopBarButton
 import com.uvarov.coffeeshop.common.presentation.theme.Brown
 import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
-import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLightActive
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 
 @Composable
@@ -113,12 +112,7 @@ fun ProductDetailScreen(
                 Spacer(Modifier.height(16.dp))
                 DetailSection(product = product)
                 Spacer(Modifier.height(16.dp))
-                HorizontalDivider(
-                    thickness = 1.dp,
-                    color = SurfaceLightActive,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                )
+                SectionDivider()
                 Spacer(Modifier.height(16.dp))
                 DescriptionSection(product)
                 Spacer(modifier = Modifier.height(24.dp))

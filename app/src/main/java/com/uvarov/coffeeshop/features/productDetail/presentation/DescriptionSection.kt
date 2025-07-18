@@ -32,7 +32,7 @@ fun DescriptionSection(
     ) {
         Text(
             text = stringResource(R.string.product_detail_description_title),
-            style = CoffeeTheme.typography.detailSectionTitle
+            style = CoffeeTheme.typography.sectionTitle
         )
         Spacer(Modifier.height(8.dp))
         Text(

@@ -19,14 +19,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.data.product.toDomain
+import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.Product
-import com.uvarov.coffeeshop.common.presentation.utils.categoryName
-import com.uvarov.coffeeshop.common.presentation.theme.GreyLighter
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
 import com.uvarov.coffeeshop.common.presentation.theme.GreyNormalActive
 import com.uvarov.coffeeshop.common.presentation.theme.GreyNormalHover
 import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
+import com.uvarov.coffeeshop.common.presentation.utils.categoryName
 
 @Composable
 fun DetailSection(
@@ -48,10 +48,7 @@ fun DetailSection(
         Spacer(Modifier.height(4.dp))
         Text(
             text = categoryName(product.category),
-            color = GreyLighter,
-            fontSize = 12.sp,
-            fontFamily = SoraFontFamily,
-            lineHeight = 14.4.sp,
+            style = CoffeeTheme.typography.categoryName
         )
         Spacer(Modifier.height(16.dp))
         Row(

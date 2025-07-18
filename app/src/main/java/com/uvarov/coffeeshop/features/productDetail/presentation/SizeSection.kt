@@ -52,7 +52,7 @@ fun SizeSection(
     ) {
         Text(
             text = stringResource(R.string.product_detail_size_title),
-            style = CoffeeTheme.typography.detailSectionTitle
+            style = CoffeeTheme.typography.sectionTitle
         )
         Spacer(Modifier.height(16.dp))
         SizesRow(

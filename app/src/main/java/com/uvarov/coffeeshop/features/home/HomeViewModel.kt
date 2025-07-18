@@ -3,7 +3,7 @@ package com.uvarov.coffeeshop.features.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uvarov.coffeeshop.common.data.product.ProductCategory
-import com.uvarov.coffeeshop.common.domain.product.GetAllProductsUseCase
+import com.uvarov.coffeeshop.common.domain.product.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,15 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllProductsUseCase: GetAllProductsUseCase,
+    private val getProductsUseCase: GetProductsUseCase,
 ) : ViewModel() {
 
     private val searchText = MutableStateFlow("")
     private val selectedCategory = MutableStateFlow(ProductCategory.AllCoffee)
-    private val allProducts = getAllProductsUseCase()
+    private val products = getProductsUseCase()
 
     val state: StateFlow<HomeState> = combine(
-        searchText, selectedCategory, allProducts
+        searchText, selectedCategory, products
     ) { searchText, selectedCategory, allProducts ->
         val filteredProducts = allProducts
             .filter { searchText.isBlank() || it.name.contains(searchText, ignoreCase = true) }

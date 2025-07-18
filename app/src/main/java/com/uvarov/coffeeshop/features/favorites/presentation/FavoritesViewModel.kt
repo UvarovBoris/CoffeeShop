@@ -2,8 +2,8 @@ package com.uvarov.coffeeshop.features.favorites.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uvarov.coffeeshop.common.domain.favorites.GetAllFavoritesUseCase
-import com.uvarov.coffeeshop.common.domain.product.GetAllProductsUseCase
+import com.uvarov.coffeeshop.common.domain.favorites.GetFavoritesUseCase
+import com.uvarov.coffeeshop.common.domain.product.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    private val getAllProductsUseCase: GetAllProductsUseCase,
-    private val getAllFavoritesUseCase: GetAllFavoritesUseCase,
+    private val getProductsUseCase: GetProductsUseCase,
+    private val getFavoritesUseCase: GetFavoritesUseCase,
 ) : ViewModel() {
 
-    private val productsFlow = getAllProductsUseCase()
-    private val favoritesFlow = getAllFavoritesUseCase()
+    private val productsFlow = getProductsUseCase()
+    private val favoritesFlow = getFavoritesUseCase()
 
     val state: StateFlow<FavoritesState> = combine(
         productsFlow, favoritesFlow

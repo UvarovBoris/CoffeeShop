@@ -4,8 +4,8 @@ import com.uvarov.coffeeshop.common.data.favorites.FavoritesDataSource
 import com.uvarov.coffeeshop.common.data.favorites.FavoritesDataSourceImpl
 import com.uvarov.coffeeshop.common.data.favorites.FavoritesRepositoryImpl
 import com.uvarov.coffeeshop.common.domain.favorites.FavoritesRepository
-import com.uvarov.coffeeshop.common.domain.favorites.GetAllFavoritesUseCase
-import com.uvarov.coffeeshop.common.domain.favorites.GetAllFavoritesUseCaseImpl
+import com.uvarov.coffeeshop.common.domain.favorites.GetFavoritesUseCase
+import com.uvarov.coffeeshop.common.domain.favorites.GetFavoritesUseCaseImpl
 import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCase
 import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCaseImpl
 import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCase
@@ -34,10 +34,10 @@ object FavoritesModule {
     }
 
     @Provides
-    fun provideGetAllFavoritesUseCase(
+    fun provideGetFavoritesUseCase(
         repository: FavoritesRepository,
-    ): GetAllFavoritesUseCase {
-        return GetAllFavoritesUseCaseImpl(repository)
+    ): GetFavoritesUseCase {
+        return GetFavoritesUseCaseImpl(repository)
     }
 
     @Provides

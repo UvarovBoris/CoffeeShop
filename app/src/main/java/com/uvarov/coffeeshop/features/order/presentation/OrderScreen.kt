@@ -97,7 +97,8 @@ fun OrderScreen(
 @Preview
 @Composable
 fun OrderScreenPreview() {
+    val products = mapOf(testProducts.first().toDomain() to 1)
     OrderScreen(
-        state = OrderState.Success
+        state = OrderState.Success(products)
     )
 }

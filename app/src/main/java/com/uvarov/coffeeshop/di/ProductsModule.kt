@@ -3,8 +3,8 @@ package com.uvarov.coffeeshop.di
 import com.uvarov.coffeeshop.common.data.product.ProductsDataSource
 import com.uvarov.coffeeshop.common.data.product.ProductsDataSourceImpl
 import com.uvarov.coffeeshop.common.data.product.ProductsRepositoryImpl
-import com.uvarov.coffeeshop.common.domain.product.GetAllProductsUseCase
-import com.uvarov.coffeeshop.common.domain.product.GetAllProductsUseCaseImpl
+import com.uvarov.coffeeshop.common.domain.product.GetProductsUseCase
+import com.uvarov.coffeeshop.common.domain.product.GetProductsUseCaseImpl
 import com.uvarov.coffeeshop.common.domain.product.GetProductUseCase
 import com.uvarov.coffeeshop.common.domain.product.GetProductUseCaseImpl
 import com.uvarov.coffeeshop.common.domain.product.ProductsRepository
@@ -30,10 +30,10 @@ object ProductsModule {
     }
 
     @Provides
-    fun provideGetAllProductsUseCase(
+    fun provideGetProductsUseCase(
         repository: ProductsRepository,
-    ): GetAllProductsUseCase {
-        return GetAllProductsUseCaseImpl(repository)
+    ): GetProductsUseCase {
+        return GetProductsUseCaseImpl(repository)
     }
 
     @Provides

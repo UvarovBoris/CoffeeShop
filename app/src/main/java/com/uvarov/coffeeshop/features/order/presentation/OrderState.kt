@@ -1,9 +1,13 @@
 package com.uvarov.coffeeshop.features.order.presentation
 
-sealed class OrderState {
-    object Loading : OrderState()
+import com.uvarov.coffeeshop.common.domain.product.Product
 
-    object Success : OrderState()
+sealed class OrderState {
+    data object Loading : OrderState()
+
+    data class Success(
+        val products: Map<Product, Int>
+    ) : OrderState()
 
     data class Error(val message: String) : OrderState()
 }

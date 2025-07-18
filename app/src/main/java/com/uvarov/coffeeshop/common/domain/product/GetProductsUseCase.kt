@@ -2,13 +2,13 @@ package com.uvarov.coffeeshop.common.domain.product
 
 import kotlinx.coroutines.flow.Flow
 
-interface GetAllProductsUseCase {
+interface GetProductsUseCase {
     operator fun invoke(): Flow<List<Product>>
 }
 
-class GetAllProductsUseCaseImpl(
+class GetProductsUseCaseImpl(
     private val productRepository: ProductsRepository,
-) : GetAllProductsUseCase {
+) : GetProductsUseCase {
     override operator fun invoke(): Flow<List<Product>> {
         return productRepository.getAllProducts()
     }

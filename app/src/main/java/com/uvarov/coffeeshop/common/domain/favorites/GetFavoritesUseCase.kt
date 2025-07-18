@@ -2,13 +2,13 @@ package com.uvarov.coffeeshop.common.domain.favorites
 
 import kotlinx.coroutines.flow.Flow
 
-interface GetAllFavoritesUseCase {
+interface GetFavoritesUseCase {
     operator fun invoke(): Flow<Set<Int>>
 }
 
-class GetAllFavoritesUseCaseImpl(
+class GetFavoritesUseCaseImpl(
     private val favoritesRepository: FavoritesRepository,
-) : GetAllFavoritesUseCase {
+) : GetFavoritesUseCase {
 
     override operator fun invoke(): Flow<Set<Int>> {
         return favoritesRepository.getAllFavorites()

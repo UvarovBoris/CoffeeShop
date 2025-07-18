@@ -17,7 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.domain.product.Product
-import com.uvarov.coffeeshop.features.home.ProductItem
+import com.uvarov.coffeeshop.common.presentation.product.ProductItem
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 

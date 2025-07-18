@@ -1,4 +1,4 @@
-package com.uvarov.coffeeshop.features.home
+package com.uvarov.coffeeshop.common.presentation.product
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -28,22 +27,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.uvarov.coffeeshop.R
-import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.data.product.toDomain
+import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.Product
-import com.uvarov.coffeeshop.common.presentation.utils.categoryName
 import com.uvarov.coffeeshop.common.presentation.theme.Black
 import com.uvarov.coffeeshop.common.presentation.theme.Brown
 import com.uvarov.coffeeshop.common.presentation.theme.GreyLighter
 import com.uvarov.coffeeshop.common.presentation.theme.GreyNormal
 import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceWhite
+import com.uvarov.coffeeshop.common.presentation.utils.categoryName
 
 @Composable
 fun ProductItem(
     product: Product,
     modifier: Modifier = Modifier,
-    onClick: (Product) -> Unit,
+    onClick: (Product) -> Unit = {},
+    onAddToCartClick: (Product) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -131,11 +131,10 @@ fun ProductItem(
 
             Box(
                 modifier = Modifier
-                    .size(32.dp)
-                    .background(
-                        color = Brown,
-                        shape = RoundedCornerShape(8.dp)
-                    ),
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Brown)
+                    .clickable(onClick = { onAddToCartClick(product) })
+                    .padding(8.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -156,7 +155,6 @@ fun ProductItem(
 @Composable
 fun ProductItemPreview() {
     ProductItem(
-        product = testProducts.first().toDomain(),
-        onClick = {}
+        product = testProducts.first().toDomain()
     )
 }

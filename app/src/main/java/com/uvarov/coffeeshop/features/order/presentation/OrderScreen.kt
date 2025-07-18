@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -63,10 +65,12 @@ fun OrderScreen(
             )
         }
     ) { padding ->
+        val products = if (state is OrderState.Success) state.products else emptyMap()
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(color = SurfaceLight)
+                .verticalScroll(state = rememberScrollState())
                 .padding(
                     start = 24.dp,
                     end = 24.dp,
@@ -85,8 +89,14 @@ fun OrderScreen(
             )
             Spacer(Modifier.height(16.dp))
             SectionDivider()
-            Spacer(Modifier.height(16.dp))
-            CartItem(testProducts.first().toDomain(), 1)
+            products.forEach { (product, quantity) ->
+                Spacer(Modifier.height(16.dp))
+                CartItem(
+                    product = product,
+                    quantity = quantity,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
             Spacer(Modifier.height(16.dp))
             SectionDivider()
             Spacer(Modifier.height(16.dp))

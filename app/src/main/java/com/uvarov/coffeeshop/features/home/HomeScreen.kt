@@ -19,13 +19,14 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testCategories
 import com.uvarov.coffeeshop.common.data.testProducts
-import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.domain.product.Product
+import com.uvarov.coffeeshop.common.presentation.product.ProductItem
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
+import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 
 @Composable
 fun HomeScreen(
@@ -35,15 +36,12 @@ fun HomeScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     HomeScreen(
-        state,
-        padding,
-        onProductClick,
-        onSearchTextChange = { searchText ->
-            viewModel.onSearchTextChange(searchText)
-        },
-        onCategorySelect = { category ->
-            viewModel.onCategorySelect(category)
-        }
+        state = state,
+        padding = padding,
+        onProductClick = onProductClick,
+        onAddToCartClick = viewModel::onAddToCartClick,
+        onSearchTextChange = viewModel::onSearchTextChange,
+        onCategorySelect = viewModel::onCategorySelect
     )
 }
 
@@ -51,9 +49,10 @@ fun HomeScreen(
 fun HomeScreen(
     state: HomeState,
     padding: PaddingValues,
-    onProductClick: (Product) -> Unit,
-    onSearchTextChange: (String) -> Unit,
-    onCategorySelect: (ProductCategory) -> Unit,
+    onProductClick: (Product) -> Unit = {},
+    onAddToCartClick: (Product) -> Unit = {},
+    onSearchTextChange: (String) -> Unit = {},
+    onCategorySelect: (ProductCategory) -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = false)
     Column(
@@ -102,7 +101,8 @@ fun HomeScreen(
                     ProductItem(
                         item,
                         modifier = Modifier.animateItem(),
-                        onClick = onProductClick
+                        onClick = onProductClick,
+                        onAddToCartClick = onAddToCartClick
                     )
                 }
             }
@@ -121,8 +121,5 @@ fun HomeScreenPreview() {
             productsState = ProductsState.Success(testProducts.map { it.toDomain() })
         ),
         padding = PaddingValues(0.dp),
-        onProductClick = {},
-        onSearchTextChange = {},
-        onCategorySelect = {}
     )
 }

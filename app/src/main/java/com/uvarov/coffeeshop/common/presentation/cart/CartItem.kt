@@ -43,7 +43,6 @@ fun CartItem(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .fillMaxWidth()
     ) {
         AsyncImage(
             model = product.image,

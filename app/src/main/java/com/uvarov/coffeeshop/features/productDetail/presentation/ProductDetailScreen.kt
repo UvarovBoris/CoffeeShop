@@ -49,7 +49,10 @@ fun ProductDetailScreen(
         onBackClick,
         onFavoritesClick = viewModel::onFavoriteToggle,
         onVariantSelect = viewModel::onVariantSelect,
-        onBuyClick
+        onBuyClick = {
+            viewModel.onBuyClick()
+            onBuyClick()
+        }
     )
 }
 

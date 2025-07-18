@@ -3,6 +3,7 @@ package com.uvarov.coffeeshop.features.productDetail.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uvarov.coffeeshop.common.domain.cart.AddProductToCartUseCase
 import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCase
 import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCase
 import com.uvarov.coffeeshop.common.domain.product.GetProductUseCase
@@ -24,7 +25,8 @@ class ProductDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getProductUseCase: GetProductUseCase,
     private val isFavoriteUseCase: IsFavoriteUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+    private val addProductToCartUseCase: AddProductToCartUseCase,
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -64,5 +66,12 @@ class ProductDetailViewModel @Inject constructor(
 
     fun onVariantSelect(variant: ProductVariant) {
         selectedVariant.value = variant
+    }
+
+    fun onBuyClick() {
+        viewModelScope.launch {
+            val productId = savedStateHandle.get<Int>("productId") ?: return@launch
+            addProductToCartUseCase(productId)
+        }
     }
 }

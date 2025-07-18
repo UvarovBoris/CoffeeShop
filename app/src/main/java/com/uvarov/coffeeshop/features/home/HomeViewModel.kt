@@ -3,18 +3,22 @@ package com.uvarov.coffeeshop.features.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uvarov.coffeeshop.common.data.product.ProductCategory
+import com.uvarov.coffeeshop.common.domain.cart.AddProductToCartUseCase
 import com.uvarov.coffeeshop.common.domain.product.GetProductsUseCase
+import com.uvarov.coffeeshop.common.domain.product.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
+    private val addProductToCartUseCase: AddProductToCartUseCase,
 ) : ViewModel() {
 
     private val searchText = MutableStateFlow("")
@@ -44,5 +48,11 @@ class HomeViewModel @Inject constructor(
 
     fun onSearchTextChange(text: String) {
         searchText.value = text
+    }
+
+    fun onAddToCartClick(product: Product) {
+        viewModelScope.launch {
+            addProductToCartUseCase.invoke(product.id)
+        }
     }
 }

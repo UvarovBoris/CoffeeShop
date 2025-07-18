@@ -6,16 +6,22 @@ import com.uvarov.coffeeshop.common.data.favorites.FavoritesRepositoryImpl
 import com.uvarov.coffeeshop.common.domain.favorites.FavoritesRepository
 import com.uvarov.coffeeshop.common.domain.favorites.GetAllFavoritesUseCase
 import com.uvarov.coffeeshop.common.domain.favorites.GetAllFavoritesUseCaseImpl
+import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCase
+import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCaseImpl
+import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCase
+import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object FavoritesModule {
 
     @Provides
+    @Singleton
     fun provideFavoritesDataSource(): FavoritesDataSource {
         return FavoritesDataSourceImpl()
     }
@@ -32,5 +38,19 @@ object FavoritesModule {
         repository: FavoritesRepository,
     ): GetAllFavoritesUseCase {
         return GetAllFavoritesUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideIsFavoriteUseCase(
+        repository: FavoritesRepository,
+    ): IsFavoriteUseCase {
+        return IsFavoriteUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideToggleFavoriteUseCase(
+        repository: FavoritesRepository,
+    ): ToggleFavoriteUseCase {
+        return ToggleFavoriteUseCaseImpl(repository)
     }
 }

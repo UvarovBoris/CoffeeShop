@@ -3,6 +3,8 @@ package com.uvarov.coffeeshop.features.productDetail.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uvarov.coffeeshop.common.domain.favorites.IsFavoriteUseCase
+import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCase
 import com.uvarov.coffeeshop.common.domain.product.GetProductUseCase
 import com.uvarov.coffeeshop.common.domain.product.ProductSize
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
@@ -14,12 +16,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getProductUseCase: GetProductUseCase,
+    private val isFavoriteUseCase: IsFavoriteUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -27,13 +32,19 @@ class ProductDetailViewModel @Inject constructor(
         .getStateFlow("productId", -1)
         .flatMapLatest { getProductUseCase(it) }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val isFavorite = savedStateHandle
+        .getStateFlow("productId", -1)
+        .flatMapLatest { isFavoriteUseCase(it) }
+
     private val selectedVariant = MutableStateFlow<ProductVariant?>(null)
 
     val state: StateFlow<ProductDetailState> = combine(
-        product, selectedVariant,
-    ) { product, selectedVariant ->
+        product, isFavorite, selectedVariant,
+    ) { product, isFavorite, selectedVariant ->
         ProductDetailState.Success(
             product = product,
+            isFavorite = isFavorite,
             selectedVariant = selectedVariant
                 ?: product.variants.find { it.size == ProductSize.Medium }
                 ?: product.variants.first()
@@ -43,6 +54,13 @@ class ProductDetailViewModel @Inject constructor(
         SharingStarted.WhileSubscribed(5000),
         ProductDetailState.Loading
     )
+
+    fun onFavoriteToggle() {
+        viewModelScope.launch {
+            val productId = savedStateHandle.get<Int>("productId") ?: return@launch
+            toggleFavoriteUseCase(productId)
+        }
+    }
 
     fun onVariantSelect(variant: ProductVariant) {
         selectedVariant.value = variant

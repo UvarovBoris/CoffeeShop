@@ -11,6 +11,10 @@ class FavoritesRepositoryImpl(
         return favoritesDataSource.getAllFavorites()
     }
 
+    override fun isFavorite(id: Int): Flow<Boolean> {
+        return favoritesDataSource.isFavorite(id)
+    }
+
     override suspend fun addFavorite(id: Int) {
         favoritesDataSource.addFavorite(id)
     }

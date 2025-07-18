@@ -8,6 +8,7 @@ sealed class ProductDetailState {
 
     data class Success(
         val product: Product,
+        val isFavorite: Boolean,
         val selectedVariant: ProductVariant,
     ) : ProductDetailState()
 

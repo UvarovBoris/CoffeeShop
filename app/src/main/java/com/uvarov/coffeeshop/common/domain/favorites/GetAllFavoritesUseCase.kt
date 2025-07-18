@@ -9,6 +9,7 @@ interface GetAllFavoritesUseCase {
 class GetAllFavoritesUseCaseImpl(
     private val favoritesRepository: FavoritesRepository,
 ) : GetAllFavoritesUseCase {
+
     override operator fun invoke(): Flow<Set<Int>> {
         return favoritesRepository.getAllFavorites()
     }

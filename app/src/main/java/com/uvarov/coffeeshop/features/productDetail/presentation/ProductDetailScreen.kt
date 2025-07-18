@@ -24,25 +24,26 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.uvarov.coffeeshop.R
+import com.uvarov.coffeeshop.common.data.product.toDomain
+import com.uvarov.coffeeshop.common.data.testProducts
+import com.uvarov.coffeeshop.common.domain.product.ProductVariant
 import com.uvarov.coffeeshop.common.presentation.TopBar
 import com.uvarov.coffeeshop.common.presentation.TopBarButton
-import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
-import com.uvarov.coffeeshop.common.data.testProducts
-import com.uvarov.coffeeshop.common.data.product.toDomain
-import com.uvarov.coffeeshop.common.domain.product.ProductVariant
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLightActive
+import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 
 @Composable
 fun ProductDetailScreen(
     viewModel: ProductDetailViewModel,
-    onBackClick: () -> Unit,
-    onBuyClick: () -> Unit,
+    onBackClick: () -> Unit = {},
+    onBuyClick: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     ProductDetailScreen(
         state,
         onBackClick,
+        onFavoritesClick = viewModel::onFavoriteToggle,
         onVariantSelect = viewModel::onVariantSelect,
         onBuyClick
     )
@@ -51,13 +52,15 @@ fun ProductDetailScreen(
 @Composable
 fun ProductDetailScreen(
     state: ProductDetailState,
-    onBackClick: () -> Unit,
-    onVariantSelect: (ProductVariant) -> Unit,
-    onBuyClick: () -> Unit,
+    onBackClick: () -> Unit = {},
+    onFavoritesClick: () -> Unit = {},
+    onVariantSelect: (ProductVariant) -> Unit = {},
+    onBuyClick: () -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = true)
     val product = if (state is ProductDetailState.Success) state.product else null
     val selectedVariant = if (state is ProductDetailState.Success) state.selectedVariant else null
+    val isFavorite = if (state is ProductDetailState.Success) state.isFavorite else false
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -65,9 +68,9 @@ fun ProductDetailScreen(
                 title = stringResource(R.string.product_detail_title),
                 rightButton = {
                     TopBarButton(
-                        icon = R.drawable.heart,
+                        icon = if (isFavorite) R.drawable.heart_filled else R.drawable.heart,
                         contentDescription = "Favorites",
-                        onClick = { }
+                        onClick = onFavoritesClick
                     )
                 },
                 needBack = true,
@@ -133,10 +136,10 @@ fun ProductDetailScreen(
 @Composable
 fun ProductDetailScreenPreview() {
     val product = testProducts.first().toDomain()
-    ProductDetailScreen(
-        state = ProductDetailState.Success(product, product.variants.first()),
-        onBackClick = {},
-        onVariantSelect = {},
-        onBuyClick = {}
+    val state = ProductDetailState.Success(
+        product,
+        true,
+        product.variants.first()
     )
+    ProductDetailScreen(state = state)
 }

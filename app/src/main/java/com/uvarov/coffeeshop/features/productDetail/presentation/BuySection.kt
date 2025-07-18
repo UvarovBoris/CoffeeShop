@@ -30,6 +30,7 @@ import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
 import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
 import com.uvarov.coffeeshop.common.presentation.theme.GreyLightHover
 import com.uvarov.coffeeshop.common.presentation.theme.SoraFontFamily
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceWhite
@@ -83,10 +84,7 @@ fun BuySection(
         ) {
             Text(
                 text = stringResource(R.string.product_detail_buy_button),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                fontFamily = SoraFontFamily,
-                lineHeight = 24.sp
+                style = CoffeeTheme.typography.buttonText,
             )
         }
     }

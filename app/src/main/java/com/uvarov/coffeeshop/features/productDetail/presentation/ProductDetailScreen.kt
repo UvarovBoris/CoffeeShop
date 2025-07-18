@@ -1,6 +1,9 @@
 package com.uvarov.coffeeshop.features.productDetail.presentation
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -12,12 +15,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,7 +33,8 @@ import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
 import com.uvarov.coffeeshop.common.presentation.TopBar
-import com.uvarov.coffeeshop.common.presentation.TopBarButton
+import com.uvarov.coffeeshop.common.presentation.theme.Brown
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLightActive
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
@@ -67,11 +73,7 @@ fun ProductDetailScreen(
             TopBar(
                 title = stringResource(R.string.product_detail_title),
                 rightButton = {
-                    TopBarButton(
-                        icon = if (isFavorite) R.drawable.heart_filled else R.drawable.heart,
-                        contentDescription = "Favorites",
-                        onClick = onFavoritesClick
-                    )
+                    FavoritesButton(isFavorite, onFavoritesClick)
                 },
                 needBack = true,
                 onBackClick = onBackClick
@@ -127,6 +129,32 @@ fun ProductDetailScreen(
                     onItemSelect = onVariantSelect
                 )
                 Spacer(modifier = Modifier.height(24.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun FavoritesButton(isFavorite: Boolean, onFavoritesClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(12.dp))
+            .clickable(onClick = onFavoritesClick)
+            .padding(10.dp)
+    ) {
+        Crossfade(isFavorite) {
+            if (it) {
+                Icon(
+                    painter = painterResource(R.drawable.heart_filled),
+                    contentDescription = "Remove from favorites",
+                    tint = Brown,
+                )
+            } else {
+                Icon(
+                    painter = painterResource(R.drawable.heart),
+                    contentDescription = "Add to favorites",
+                    tint = CoffeeTheme.color.onTopBar,
+                )
             }
         }
     }

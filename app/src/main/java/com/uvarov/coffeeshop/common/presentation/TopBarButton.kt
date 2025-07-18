@@ -9,6 +9,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.uvarov.coffeeshop.common.presentation.theme.CoffeeTheme
@@ -18,7 +19,8 @@ fun TopBarButton(
     @DrawableRes icon: Int,
     contentDescription: String,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
+    tint: Color = CoffeeTheme.color.onTopBar,
+    onClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
@@ -29,7 +31,7 @@ fun TopBarButton(
         Icon(
             painter = painterResource(icon),
             contentDescription = contentDescription,
-            tint = CoffeeTheme.color.onTopBar,
+            tint = tint,
         )
     }
 }

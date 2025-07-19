@@ -9,9 +9,12 @@ import com.uvarov.coffeeshop.common.domain.favorites.ToggleFavoriteUseCase
 import com.uvarov.coffeeshop.common.domain.product.GetProductUseCase
 import com.uvarov.coffeeshop.common.domain.product.ProductSize
 import com.uvarov.coffeeshop.common.domain.product.ProductVariant
+import com.uvarov.coffeeshop.common.navigation.Order
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -57,6 +60,9 @@ class ProductDetailViewModel @Inject constructor(
         ProductDetailState.Loading
     )
 
+    private val _navigationEvent = MutableSharedFlow<Any>()
+    val navigationEvent: SharedFlow<Any> = _navigationEvent
+
     fun onFavoriteToggle() {
         viewModelScope.launch {
             val productId = savedStateHandle.get<Int>("productId") ?: return@launch
@@ -72,6 +78,7 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val productId = savedStateHandle.get<Int>("productId") ?: return@launch
             addProductToCartUseCase(productId)
+            _navigationEvent.emit(Order)
         }
     }
 }

@@ -76,7 +76,7 @@ fun AppNavHost(
             ProductDetailScreen(
                 viewModel,
                 onBackClick = { navController.popBackStack() },
-                onBuyClick = { navController.navigate(Order) }
+                onNavigation = { navController.navigate(it) }
             )
         }
         composable<Order>(

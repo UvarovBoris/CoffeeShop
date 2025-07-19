@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,7 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import coil.compose.AsyncImage
 import com.uvarov.coffeeshop.R
 import com.uvarov.coffeeshop.common.data.product.toDomain
@@ -41,18 +44,24 @@ import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 fun ProductDetailScreen(
     viewModel: ProductDetailViewModel,
     onBackClick: () -> Unit = {},
-    onBuyClick: () -> Unit = {},
+    onNavigation: (Any) -> Unit = {},
 ) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent
+            .flowWithLifecycle(lifecycleOwner.lifecycle)
+            .collect { route ->
+                onNavigation(route)
+            }
+    }
+
     val state by viewModel.state.collectAsStateWithLifecycle()
     ProductDetailScreen(
         state,
         onBackClick,
         onFavoritesClick = viewModel::onFavoriteToggle,
         onVariantSelect = viewModel::onVariantSelect,
-        onBuyClick = {
-            viewModel.onBuyClick()
-            onBuyClick()
-        }
+        onBuyClick = viewModel::onBuyClick
     )
 }
 

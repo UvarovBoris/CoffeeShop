@@ -34,7 +34,7 @@ fun TopBar(
             .fillMaxWidth()
             .background(color = SurfaceLight)
             .padding(
-                top = 24.dp + statusBarTopPadding,
+                top = 16.dp + statusBarTopPadding,
                 start = 24.dp,
                 end = 24.dp
             ),

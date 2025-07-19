@@ -21,6 +21,7 @@ val SurfaceNormalActive = Color(0xFFD8D8D8)
 
 object CoffeeColor {
     val onTopBar = GreyNormalHover
-
     val title = GreyNormalActive
+    val actionButton = Brown
+    val onActionButton = SurfaceWhite
 }

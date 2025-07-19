@@ -1,24 +1,30 @@
 package com.uvarov.coffeeshop.features.cart.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.uvarov.coffeeshop.R
 import com.uvarov.coffeeshop.common.data.product.toDomain
 import com.uvarov.coffeeshop.common.data.testProducts
 import com.uvarov.coffeeshop.common.domain.product.Product
 import com.uvarov.coffeeshop.common.presentation.cart.CartItem
+import com.uvarov.coffeeshop.common.presentation.theme.CoffeeColor
 import com.uvarov.coffeeshop.common.presentation.theme.SurfaceLight
 import com.uvarov.coffeeshop.common.presentation.utils.SetStatusBarTextColor
 
@@ -38,7 +44,6 @@ fun CartScreen(
     )
 }
 
-
 @Composable
 fun CartScreen(
     state: CartState,
@@ -48,28 +53,50 @@ fun CartScreen(
     onOrderClick: () -> Unit = {},
 ) {
     SetStatusBarTextColor(isDark = true)
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = SurfaceLight)
             .padding(
-                start = 24.dp,
-                end = 24.dp,
                 top = padding.calculateTopPadding()
             )
     ) {
-        val products = if (state is CartState.Success) state.products else emptyMap()
-        products.forEach { (product, quantity) ->
-            CartItem(
-                product,
-                quantity,
-                onPlusClick = onAddToCartClick,
-                onMinusClick = onRemoveFromCartClick
-            )
-            Spacer(Modifier.height(16.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = SurfaceLight)
+                .padding(
+                    start = 24.dp,
+                    end = 24.dp,
+                )
+        ) {
+            val products = if (state is CartState.Success) state.products else emptyMap()
+            products.forEach { (product, quantity) ->
+                CartItem(
+                    product,
+                    quantity,
+                    onPlusClick = onAddToCartClick,
+                    onMinusClick = onRemoveFromCartClick
+                )
+                Spacer(Modifier.height(16.dp))
+            }
         }
-        Button(onClick = onOrderClick) {
-            Text(text = "Order")
+        FloatingActionButton(
+            containerColor = CoffeeColor.actionButton,
+            contentColor = CoffeeColor.onActionButton,
+            onClick = onOrderClick,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(
+                    end = 16.dp,
+                    bottom = 16.dp + padding.calculateBottomPadding()
+                )
+        ) {
+            Icon(
+                painterResource(R.drawable.wallet),
+                contentDescription = "Order",
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }
